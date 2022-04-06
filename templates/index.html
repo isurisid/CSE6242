@@ -1,1 +1,621 @@
+<!DOCTYPE html>
+<html lang="en">
 
+<head>
+
+    <title>Housing Recommender System</title>
+
+    <style>
+
+body,
+h1, h2, h3, legend {
+  margin: 0;
+  padding: 0;
+}
+
+
+table {
+  border-collapse: collapse;
+  border-spacing: 0;
+}
+
+body {
+  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  font-weight: 400;
+  font-size: 14px;
+}
+
+h1, h2 {
+  font-weight: 400;
+}
+
+h1 {
+  font-size: 36px;
+}
+
+h2 {
+  font-size: 30px;
+}
+
+/* ==========================================================================
+   #SPACING FOR SUBMIT BUTTON
+   ========================================================================== */
+
+.p-t-100 {
+  padding-top: 100px;
+}
+
+.p-t-20 {
+  padding-top: 20px;
+}
+
+.p-b-100 {
+  padding-bottom: 100px;
+}
+
+/* ==========================================================================
+   #FIT INPUT BOX IN CENTER
+   ========================================================================== */
+.wrapper {
+ padding-top:  50px;
+  margin: 0 auto;
+}
+
+.wrapper--w680 {
+  max-width: 680px;
+}
+
+/* ==========================================================================
+   # SUBMIT BUTTON
+   ========================================================================== */
+.btn {
+
+  line-height: 40px;
+  display: inline-block;
+  padding: 0 25px;
+  cursor: pointer;
+  font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+  color: #fff;
+  -webkit-transition: all 0.4s ease;
+  -o-transition: all 0.4s ease;
+  -moz-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+  font-size: 14px;
+  font-weight: 700;
+  text-align: center;
+
+}
+
+.btn--radius {
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+
+}
+
+.btn--green {
+  background: #57b846;
+
+}
+
+.btn--green:hover {
+  background: #4dae3c;
+}
+
+
+/* ==========================================================================
+   #TITLE
+   ========================================================================== */
+.title {
+  margin-bottom: 30px;
+}
+
+/* ==========================================================================
+   #CARD FOR ENTERING USER PREFERENCES
+   ========================================================================== */
+.card {
+  overflow: hidden;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 20px;
+  background: #fff;
+}
+
+
+
+.card-1 .card-body {
+  padding: 0 70px;
+  padding-top:  10px;
+  padding-bottom: 20px;
+}
+
+
+}
+
+    </style>
+<style>
+
+    /* ==========================================================================
+   #BACKGROUNG IMAGE
+   ========================================================================== */
+
+   body,html{
+         height: 100%;
+         margin:0;
+         }
+         .bg{
+         background-image: url('https://images.unsplash.com/photo-1527030280862-64139fba04ca?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+         background-position: center-center;
+         background-size: cover;
+         background-repeat: no-repeat;
+         height: 100%;
+        }
+     .title{
+     color: blue;
+       font-family:    Arial, Helvetica, sans-serif
+       font-size:      50px;
+    }
+   </style>
+
+     <style>
+
+            .container .box {
+               display : flex;
+              flex-direction : row;
+              }
+
+            .container .box .box-cell.box1 {
+            width: 80%;
+                background:white;
+                color:black;
+                text-align:justify;
+             }
+            .container .box .box-cell.box2 {
+            width: 30%;
+                background:white;
+                text-align:justify
+            }
+        </style>
+
+</head>
+
+<body>
+
+<div class="bg">
+     <div class="wrapper wrapper--w680">
+            <div class="card card-1">
+                <div class="card-heading"></div>
+                <div class="card-body">
+                    <h2 align="center" class="title">Housing Recommender System</h2>
+                    <form action="{{ url_for("predict")}}" method="POST">
+                        <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           <label for="House">Home Type:</label>
+                                               <br>
+                                               <select name="House">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference        </option>
+                                                   <option value="Single Family">Single Family</option>
+                                                   <option value="Condo">Condo</option>
+                                                   <option value="Apartment">Apartment</option>
+                                                   <option value="Townhouse">Townhouse</option>
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo1"></span></label>
+                                        <input type="range" min="1" max="10" value="5" id="myRange1" name="House Importance"/>
+                                    </div>
+
+                                </div>
+                        </div>
+
+                            <script>
+                               var slider = document.getElementById("myRange1");
+                               var output = document.getElementById("demo1");
+                               output.innerHTML = slider.value;
+
+                               slider.oninput = function() {
+                               output.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+                                                <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+
+                                                <label for="Price">Price:</label>
+                                               <br>
+                                               <select name="Price">
+                                                   <option disabled="disabled" selected="selected" >Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="$0+">$0+</option>
+                                                   <option value="$100,000+">$100,000+</option>
+                                                   <option value="$200,000+">$200,000+</option>
+                                                   <option value="$300,000+">$300,000+</option>
+                                                   <option value="$400,000+">$400,000+</option>
+                                                   <option value="$500,000+">$500,000+</option>
+                                                   <option value="$600,000+">$600,000+</option>
+                                                   <option value="$700,000+">$700,000+</option>
+                                                   <option value="$800,000+">$800,000+</option>
+                                                   <option value="$900,000+">$900,000+</option>
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+
+                                    </div>
+                                </div>
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo2"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange2" name="Price Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+
+                            <script>
+                               var slider1 = document.getElementById("myRange2");
+                               var output1 = document.getElementById("demo2");
+                               output1.innerHTML = slider.value;
+
+                               slider1.oninput = function() {
+                               output1.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+
+                            <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="Feet">Sq. Feet:</label>
+                                               <br>
+                                               <select name="Feet">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="500+">500+</option>
+                                                   <option value="750+">750+</option>
+                                                   <option value="1500+">1500+</option>
+                                                   <option value="2000+">2000+</option>
+                                                   <option value="2500+">2500+</option>
+                                                   <option value="3000+">3000+</option>
+                                                   <option value="3500+">3500+</option>
+                                                   <option value="4000+">4000+</option>
+                                                   <option value="5000+">5000+</option>
+                                                   <option value="6000+">6000+</option>
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+
+                                    </div>
+                                </div>
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo5"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange5" name="Feet Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+
+                            <script>
+                               var slider5 = document.getElementById("myRange5");
+                               var output5 = document.getElementById("demo5");
+                               output5.innerHTML = slider.value;
+
+                               slider5.oninput = function() {
+                               output5.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+
+                            <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="Bedrooms">Bedrooms:</label>
+                                               <br>
+                                               <select name="Bedrooms">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="1+">1+</option>
+                                                   <option value="2+">2+</option>
+                                                   <option value="3+">3+</option>
+                                                   <option value="4+">4+</option>
+                                                   <option value="5+">5+</option>
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo3"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange3" name="Bedroom Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+
+                            <script>
+                               var slider3 = document.getElementById("myRange3");
+                               var output3 = document.getElementById("demo3");
+                               output3.innerHTML = slider.value;
+
+                               slider3.oninput = function() {
+                               output3.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+                                                                        <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="Bathrooms">Bathrooms:</label>
+                                               <br>
+                                               <select name="Bathrooms">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="1+">1+</option>
+                                                   <option value="2+">2+</option>
+                                                   <option value="3+">3+</option>
+                                                   <option value="4+">4+</option>
+                                                   <option value="5+">5+</option>
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo4"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange4" name="Bathroom Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+
+                            <script>
+                               var slider4 = document.getElementById("myRange4");
+                               var output4 = document.getElementById("demo4");
+                               output4.innerHTML = slider.value;
+
+                               slider4.oninput = function() {
+                               output4.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+                    <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="TaxBurden">Tax Burden:</label>
+                                               <br>
+                                               <select name="TaxBurden">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="<1%"><1%</option>
+                                                   <option value="<2%"><2%</option>
+                                                   <option value="<3%"><3%</option>
+                                                   <option value="<4%"><4%</option>
+                                                   <option value="<5%"><5%</option>
+                                                   <option value="<6%"><6%</option>
+                                                   <option value="<7%"><7%</option>
+                                                   <option value="<8%"><8%</option>
+                                                   <option value="<9%"><9%</option>
+                                                   <option value="<10%"><10%</option>
+                                                   <option value=">10%">>10%</option>
+
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo6"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange6" name="Tax Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+                            <script>
+                               var slider6 = document.getElementById("myRange6");
+                               var output6 = document.getElementById("demo6");
+                               output6.innerHTML = slider.value;
+
+                               slider6.oninput = function() {
+                               output6.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+                                                                        <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="Elementary">Elementary School Rating:</label>
+                                               <br>
+                                               <select name="Elementary">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+
+                                                   <option value="1+">1+</option>
+                                                   <option value="2+">2+</option>
+                                                   <option value="3+">3+</option>
+                                                   <option value="4+">4+</option>
+                                                   <option value="5+">5+</option>
+                                                   <option value="6+">6+</option>
+                                                   <option value="7+">7+</option>
+                                                   <option value="8+">8+</option>
+                                                   <option value="9+">9+</option>
+                                                   <option value="10+">10</option>
+
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo7"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange7" name="Elementary Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+                            <script>
+                               var slider7 = document.getElementById("myRange7");
+                               var output7 = document.getElementById("demo7");
+                               output7.innerHTML = slider.value;
+
+                               slider7.oninput = function() {
+                               output7.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+                                                                        <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="Middle">Middle School Rating:</label>
+                                               <br>
+                                               <select name="Middle">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="1+">1+</option>
+                                                   <option value="2+">2+</option>
+                                                   <option value="3+">3+</option>
+                                                   <option value="4+">4+</option>
+                                                   <option value="5+">5+</option>
+                                                   <option value="6+">6+</option>
+                                                   <option value="7+">7+</option>
+                                                   <option value="8+">8+</option>
+                                                   <option value="9+">9+</option>
+                                                   <option value="10+">10</option>
+
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo8"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange8" name="Middle Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+                            <script>
+                               var slider8 = document.getElementById("myRange8");
+                               var output8 = document.getElementById("demo8");
+                               output8.innerHTML = slider.value;
+
+                               slider8.oninput = function() {
+                               output8.innerHTML = this.value;
+                                      }
+                             </script>
+     <br>
+                                                                        <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1" >
+                                           
+                                                <label for="High">High School Rating:</label>
+                                               <br>
+                                               <select name="High">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="1+">1+</option>
+                                                   <option value="2+">2+</option>
+                                                   <option value="3+">3+</option>
+                                                   <option value="4+">4+</option>
+                                                   <option value="5+">5+</option>
+                                                   <option value="6+">6+</option>
+                                                   <option value="7+">7+</option>
+                                                   <option value="8+">8+</option>
+                                                   <option value="9+">9+</option>
+                                                   <option value="10+">10</option>
+
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo9"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange9" name="High Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+                            <script>
+                               var slider9 = document.getElementById("myRange9");
+                               var output9 = document.getElementById("demo9");
+                               output9.innerHTML = slider.value;
+
+                               slider9.oninput = function() {
+                               output9.innerHTML = this.value;
+                                      }
+                             </script>
+<br>
+                                                                        <div class="container">
+                            <div class="box">
+                                <div class="box-row">
+                                    <div class="box-cell box1">
+                                           
+                                                <label for="Vaccinated">Population Vaccinated:</label>
+                                               <br>
+                                               <select name="Vaccinated">
+                                                   <option disabled="disabled" selected="selected">Select</option>
+                                                   <option value="No Preference">No Preference</option>
+                                                   <option value="10%+">10%+</option>
+                                                   <option value="20%+">20%+</option>
+                                                   <option value="30%+">30%+</option>
+                                                   <option value="40%+">40%+</option>
+                                                   <option value="50%+">50%+</option>
+                                                   <option value="60%+">60%+</option>
+                                                   <option value="70%+">70%+</option>
+                                                   <option value="80%+">80%+</option>
+                                                   <option value="90%+">90%+</option>
+                                                   <option value="100%+">100%</option>
+                                               </select>
+                                               <div class="select-dropdown" style="width:300px"></div>
+                                           </div>
+                                    </div>
+
+                                    <div class="box-cell box2">
+                                        <label> Importance:<span id="demo10"></span></label>
+                                        <input type="range" min="1" max="10" value="5" class="slider" id="myRange10" name="Vaccinated Importance">
+                                    </div>
+
+                                </div>
+                        </div>
+                            <script>
+                               var slider10 = document.getElementById("myRange10");
+                               var output10= document.getElementById("demo10");
+                               output10.innerHTML = slider.value;
+
+                               slider10.oninput = function() {
+                               output10.innerHTML = this.value;
+                                      }
+                             </script>
+
+                        <div class="p-t-20">
+                            <button class="btn btn--radius btn--green" type="submit">Submit</button>
+                        </div>
+                    </form>
+                    {{Predict_score}}
+                </div>
+            </div>
+        </div>
+    </div>
+
+</body>
+
+</html>
+<!-- end document-->
