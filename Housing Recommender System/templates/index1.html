@@ -297,10 +297,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange2" name="Price Importance"/>
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange1" name="Price Importance"/>
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo2">  </span>
+                                    <span id="demo1">  </span>
                                 </tdclass="imp_td">
                             </tr>
 
@@ -330,10 +330,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange5" name="Feet Importance">
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange2" name="Feet Importance">
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo5" >  </span>
+                                    <span id="demo2" >  </span>
                                 </td>
                             </tr>
 
@@ -376,10 +376,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange6" name="Tax Importance">
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange3" name="Tax Importance">
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo6" >  </span>
+                                    <span id="demo3" >  </span>
                                 </td>
                             </tr>
 
@@ -411,10 +411,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange7" name="Elementary Importance">
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange4" name="Elementary Importance">
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo7">  </span>
+                                    <span id="demo4">  </span>
                                 </td>
                             </tr>
 
@@ -443,10 +443,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange8" name="Middle Importance">
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange5" name="Middle Importance">
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo8" >  </span>
+                                    <span id="demo5" >  </span>
                                 </td>
                             </tr>
 
@@ -478,10 +478,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange9" name="High Importance">
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange6" name="High Importance">
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo9" >  </span>
+                                    <span id="demo6" >  </span>
                                 </td>
                             </tr>
 
@@ -513,10 +513,10 @@
                                 </td>
                                 <td class="imp_td">
                                     <!--label class="title_label"> Importance </!--label-->
-                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange10" name="Vaccinated Importance">
+                                    <input type="range" min="1" max="10" value="5" class="slider" id="myRange7" name="Vaccinated Importance">
                                 </td>
                                 <td class="imp_td_text">
-                                    <span id="demo10" >  </span>
+                                    <span id="demo7" >  </span>
                                 </td>
                             </tr>
                             <tr>
@@ -530,7 +530,7 @@
                         <script>
                             var allSliders = [];
                             var outputNum = [];
-                            for (i = 1; i <= 10; i++) {
+                            for (i = 1; i <= 7; i++) {
                                 allSliders[i] = document.getElementById("myRange" + i);
                                 outputNum[i] = document.getElementById("demo" + i);
                                 outputNum[i].innerHTML = allSliders[i].value;
