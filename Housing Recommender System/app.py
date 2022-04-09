@@ -14,7 +14,7 @@ def runmodel(to_predict_list):
 
 @app.route('/')
 def home():
-    return render_template('index.html')
+    return render_template('index1.html')
 app.config['JSON_SORT_KEYS'] = False
 @app.route('/predict',methods=['POST'])
 def predict():
