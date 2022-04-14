@@ -280,9 +280,9 @@
 
     <div class="bg">
        <div id="navlist">
-	    	<a href="#">Home</a>
-            <a href="Visuals.html">Visuals</a>
-		    <a href="About.html">About</a>
+	    	<a href="/">Home</a>
+        <a href="{{ url_for('visuals') }}">Visuals</a>
+            <a href="{{ url_for('About') }}">About</a>
             <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
             <br /><br /><br />
 
@@ -546,7 +546,7 @@
                                 </td>
                             </tr>
                             <tr>
-                                <td colspan="3" style="text-align:center">
+                                <td colspan="4" style="text-align:center">
                                     <div class="p-t-20"><button class="btn btn--radius btn--green" type="submit">Get Recommendations</button></div>
                                 </td>
                             </tr>
