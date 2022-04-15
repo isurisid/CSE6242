@@ -3,6 +3,7 @@ from flask import Flask, request, jsonify, render_template
 import pickle
 import ML.rp.functions
 from ML.rp.functions.main import reward_punishment_orchestrator
+from ML.cosine_similarity.recommender import generatePreferences
 import pandas as pd
 import logging
 
@@ -25,15 +26,8 @@ def runRecommendations():
     if request.method=='POST':
         user_inputs = request.form.to_dict()
         logging.info(f"User Preference List: {user_inputs}")
-        runRewardandPunishmentModel(user_inputs)
-        #to_predict_list = list(to_predict_list.values())
-        #to_predict_list = list(map(int, to_predict_list))
-        #result = runmodel(to_predict_list)
-        #tvalue = request.form['Price']
-
-        #print(request.form)
-        #return jsonify(request.form.to_dict())
-        #return tvalue
+        pivot_recommendations=runRewardandPunishmentModel(user_inputs)
+        recommendations=generatePreferences(pivot_recommendations)
         prediction ='This will display all the dashboards'
         return render_template("result.html", prediction = prediction)
 
