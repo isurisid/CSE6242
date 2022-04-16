@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+   <title>Housing Recommender System</title>
+
+    <style>
+
+        body,
+        h1, h2, h3, legend {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        body {
+            font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        h1, h2 {
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+        /* ==========================================================================
+        #FIT INPUT BOX IN CENTER
+        ========================================================================== */
+        .wrapper {
+            padding-top: 70px;
+            margin: 0 auto;
+        }
+
+        .wrapper--w680 {
+            max-width: 680px;
+        }
+
+        /* ==========================================================================
+        #TITLE
+        ========================================================================== */
+        .title {
+          margin-bottom: 10px;
+          font-size: 30px;
+          margin:5px;
+          margin-right:150px;
+          font-family:arial;
+        }
+
+        /* ==========================================================================
+        #CARD FOR ENTERING USER PREFERENCES
+        ========================================================================== */
+        .card {
+              overflow: hidden;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 20px;
+              background: #FFFFFF;
+              box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+              backdrop-filter: blur(3px);
+              background-color: rgba(155, 155, 155, 0.3);
+        }
+
+        .card-1 .card-body {
+             padding: 0 70px;
+             padding-top:  10px;
+             padding-bottom: 15px;
+             background: #1a1a1a;
+             box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+             backdrop-filter: blur(3px);
+             background-color: rgba(255, 255, 255, 0.2);
+        }
+        /* styling navlist */
+		#navlist {
+			width: 100%;
+		}
+
+		/* styling navlist anchor element */
+		    #navlist a {
+			float:left;
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 12px;
+			text-decoration: none;
+			font-size: 15px;
+		}
+		.navlist-right{
+			float:right;
+		}
+
+		/* hover effect of navlist anchor element */
+		#navlist a:hover {
+			background-color: #ddd;
+			color: black;
+		}
+        }
+
+        /* ==========================================================================
+        #BACKGROUNG IMAGE
+        ========================================================================== */
+
+        :root {
+            --gap-line-spacing: 5px;
+            --gap-line-spacing-authors: 2px;
+            --darkest-color-titles: #545454;
+            --main-text-color: #003057;
+            --light-color-section-banner-bkg: #B3A369;
+            --top-banner-color: #B3A369;
+            --gap-line-spacing-company: 2px;
+            --page-background-color: #ffffff;
+            --table-border-color: #B3A369;
+            --section-banner-text-color: #003057;
+            --font-my-theme: Helvetica;
+            --gap-right-before-links: 2em;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            background-image: url('/static/House.png');
+
+            background-position: center-center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+
+            .selbox select {
+                background-color: #fafafa;
+                color: black;
+                padding: 6px;
+                width: 120pt;
+                border-radius: 10px;
+              /*  #font-size: 20px;*/
+                box-shadow: 0 5px 25px rgba(0, 0, 0, 0.2);
+                -webkit-appearance: button;
+                appearance: button;
+                outline: none;
+            }
+
+
+        .title {
+            color: var(--main-text-color);;
+            font-family: Arial, Helvetica, sans-serif font-size: 50px;
+        }
+
+        .container .box {
+            display: flex;
+            flex-direction: row;
+        }
+
+            .container .box .box-cell.box1 {
+                width: 80%;
+                background: white;
+                color: black;
+                text-align: justify;
+                text-shadow: 0.1px 0.1px 0.1px #000;
+                backdrop-filter: blur(0px);
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            .container .box .box-cell.box2 {
+                width: 30%;
+                background: white;
+                text-align: justify;
+                text-shadow: 0.1px 0.1px 0.1px #000;
+                backdrop-filter: blur(0px);
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+        .title_label {
+            color: var(--main-text-color);
+        }
+
+        .imp_td {
+            text-align: center;
+            padding-left: 10pt;
+            width:35%;
+        }
+
+        .imp_td_text {
+            text-align: left;
+            #padding-left: 1em;
+            width: 10%;
+        }
+        .image {
+             background-size: 500px;
+             background-color: transparent;
+             width: 500px;
+             height: 90px;
+             position: absolute;
+             top:2%;
+             right: 33%;
+       }
+
+    </style>
+</head>
+<body>
+
+    <div class="bg">
+
+        <div id="navlist">
+		<a href="/">Home</a>
+        <a href="visuals.html">Visuals</a>
+         <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
+
+		</div>
+                <div class="wrapper wrapper--w680">
+                    <br /><br /><br />
+            <div class="card card-1">
+                <div class="card-heading"></div>
+                <div class="card-body">
+        </section>
+             <h2>About</h2>
+                    <p>The housing market has seen large fluctuations during pandemic and post-pandemic times in terms of demand. As more and more companies shift to remote-first working models, the employees have more freedom in their choice of relocating to different places. We aim to build a recommender system to help potential buyers to choose a preferred area for relocation. If this project meets all our expectations, it has the potential to improve the quality of life for users of the system.
+                        Currently, people looking to relocate base their decisions on data collected using real-estate platforms like Zillow and Redfin. However, this process is based almost entirely on housing market information, and the user must collect and analyse all the data by themselves. Moreover, this lack of context could lead to users moving based solely on housing prices and do not account for other relevant factors about the area, such as social development, education quality and tax burden.
+                    </p>
+        </section>
+
+        <section>
+                    <p>The User-Driven Housing Recommendation System takes into account not just the housing data but also other data sources such as school rating, covid vaccination rates, tax rates, and county demographics to provide highly personalised recommendations to the user. This system uses machine learning models to predict short-term median home prices using price per square feet as metric, which along with other features is used to compute recommendation-index based on weighted users preferences. This information is then used to recommend geographical locations to the user.The proposed solution assumes that the growth of the housing markets is analogous to the overall growth of the county. The data for sparsely populated states is less compared to states with high density populations.Regardless of risks of the foregoing assumption, the benefits accruing from the project offers a multi-dimensional solution to the user who is looking to relocate.</p>
+        </section>
+
+        <section>
+            <h2>Team</h2>
+            <p>Avni Pherwani apherwani6@gatech.edu , Neha Hatolkar nhatolkar3@gatech.edu, Juan Osorio josorio9@gatech.edu,
+                Rajeev Gundavarapu rgundavarapu3@gatech.edu, Samir Gajiani sgajiani3@gatech.edu , Siddharth Suri ssuri42@gatech.edu</p>
+        </section>
+</body>
