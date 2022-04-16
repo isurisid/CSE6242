@@ -5,17 +5,15 @@ import pandas as pd
 from typing import Callable
 
 # Imports
-import functions.median_ppsf as median_ppsf
-import functions.median_sale_price as median_sale_price
-import functions.percentage_fully_vaccinated as percentage_fully_vaccinated
-import functions.school_rating as school_rating
-import functions.tax_burden as tax_burden
+from . import median_ppsf as median_ppsf
+from . import median_sale_price as median_sale_price
+from . import percentage_fully_vaccinated as percentage_fully_vaccinated
+from . import school_rating as school_rating
+from . import tax_burden as tax_burden
 
 # Reading the data
 # ? WARNING: this might change in the future depending on data location
-dataset = pd.read_csv(
-    'data/v2-HousingRecommenderFinalDataset.csv'
-)
+dataset = pd.read_csv('../data/v2-HousingRecommenderFinalDataset.csv')
 # this multiplier can be changed if we consider to change importance's weight
 IMPORTANCE_MULTIPLIER = 1.0
 # Columns to index results
@@ -195,6 +193,13 @@ def main(original_df: pd.DataFrame, preferences_data: dict):
     )
 
 
+def reward_punishment_orchestrator(user_input):
+    preferences=sanitize_input(user_input)
+    reward_punishment_recommendations=main(dataset,preferences)
+    return reward_punishment_recommendations
+
+'''
 if __name__ == '__main__':
     sample_preferences = sanitize_input(raw_input=sample_input)
     final_df = main(original_df=dataset, preferences_data=sample_preferences)
+'''

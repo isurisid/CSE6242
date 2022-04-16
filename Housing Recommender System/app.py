@@ -1,3 +1,4 @@
+
 import numpy as np
 import json
 import logging
@@ -28,20 +29,13 @@ def home():
 
 @app.route('/recommendations', methods=['POST'])
 def runRecommendations():
-    if request.method == 'POST':
+    if request.method=='POST':
         user_inputs = request.form.to_dict()
         logging.info(f"User Preference List: {user_inputs}")
-        runRewardandPunishmentModel(user_inputs)
-        #to_predict_list = list(to_predict_list.values())
-        #to_predict_list = list(map(int, to_predict_list))
-        #result = runmodel(to_predict_list)
-        #tvalue = request.form['Price']
-
-        #print(request.form)
-        #return jsonify(request.form.to_dict())
-        #return tvalue
+       # pivot_recommendations=runRewardandPunishmentModel(user_inputs)
+       # recommendations=generatePreferences(pivot_recommendations)
         prediction ='This will display all the dashboards'
-        return render_template("result.html", prediction=prediction)
+        return render_template("result.html", prediction = prediction)
 
 
 # Embedding a plotly sample chart into the application
@@ -68,3 +62,4 @@ def plotly_graph():
 if __name__ == "__main__":
     logging.basicConfig(level=logging.DEBUG)
     app.run(debug=True)
+
