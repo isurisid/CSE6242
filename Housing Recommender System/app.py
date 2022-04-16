@@ -9,6 +9,8 @@ import logging
 
 app = Flask(__name__)
 
+
+
 def runRewardandPunishmentModel(user_inputs):
     logging.info("Running Reward and Punishment Model..")
     dataset=pd.read_csv("./ML/rp/data/v2-HousingRecommenderFinalDataset.csv")
@@ -21,13 +23,14 @@ def runRewardandPunishmentModel(user_inputs):
 def home():
     return render_template('index.html')
 app.config['JSON_SORT_KEYS'] = False
+
 @app.route('/recommendations',methods=['POST'])
 def runRecommendations():
     if request.method=='POST':
         user_inputs = request.form.to_dict()
         logging.info(f"User Preference List: {user_inputs}")
-        pivot_recommendations=runRewardandPunishmentModel(user_inputs)
-        recommendations=generatePreferences(pivot_recommendations)
+       # pivot_recommendations=runRewardandPunishmentModel(user_inputs)
+       # recommendations=generatePreferences(pivot_recommendations)
         prediction ='This will display all the dashboards'
         return render_template("result.html", prediction = prediction)
 

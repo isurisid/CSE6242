@@ -1,0 +1,51 @@
+Cost of Living Rank,State,Total Tax Burden
+1,New York,12.79%
+2,Hawaii,12.19%
+3,Vermont,10.75%
+4,Maine,10.50%
+5,Connecticut,10.44%
+6,Minnesota,9.99%
+7,New Jersey,9.98%
+8,Rhode Island,9.69%
+9,Illinois,9.52%
+10,California,9.48%
+11,Kansas,9.36%
+12,Maryland,9.32%
+13,Iowa,9.26%
+14,Nebraska,9.01%
+15,Mississippi,8.99%
+16,Ohio,8.96%
+17,Wisconsin,8.89%
+18,West Virginia,8.84%
+19,Louisiana,8.82%
+20,Arkansas,8.80%
+21,Massachusetts,8.77%
+22,Kentucky,8.58%
+23,Pennsylvania,8.46%
+24,Michigan,8.34%
+24,Washington,8.34%
+26,Colorado,8.31%
+27,Oregon,8.29%
+27,Utah,8.29%
+29,Nevada,8.23%
+30,Arizona,8.19%
+30,New Mexico,8.19%
+30,Texas,8.19%
+33,Indiana,8.15%
+34,North Carolina,8.07%
+35,Georgia,7.91%
+36,Idaho,7.88%
+37,Virginia,7.86%
+38,North Dakota,7.81%
+39,Missouri,7.75%
+40,Alabama,7.45%
+40,Montana,7.45%
+40,South Carolina,7.45%
+43,South Dakota,7.37%
+44,Oklahoma,7.13%
+45,Florida,6.97%
+46,New Hampshire,6.84%
+47,Delaware,6.21%
+48,Wyoming,6.14%
+49,Tennessee,5.74%
+50,Alaska,5.10%
