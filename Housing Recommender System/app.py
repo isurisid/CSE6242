@@ -48,7 +48,7 @@ def runRecommendations():
 # Use route {host}/recommended to see it
 # TODO: replace this with Samir's interactive plot
 @app.route('/recommended')
-def plotly_graph:q():
+def plotly_graph():
     df = pd.DataFrame({
         "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
         "Amount": [4, 1, 2, 2, 4, 5],
