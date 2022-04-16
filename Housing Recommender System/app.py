@@ -1,13 +1,11 @@
-import numpy as np
 import json
 import logging
-import pickle
 import plotly
 import plotly.express as px
 import pandas as pd
-from flask import Flask, request, jsonify, render_template
-import ML.rp.functions
+from flask import Flask, request, render_template
 from ML.rp.functions.main import reward_punishment_orchestrator
+from ML.Recommender.plot_recommendations import *
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -24,6 +22,16 @@ def runRewardandPunishmentModel(user_inputs):
 @app.route('/')
 def home():
     return render_template('index.html')
+
+
+@app.route('/about')
+def about():
+    return render_template('about.html')
+
+
+@app.route('/visuals')
+def visuals():
+    return render_template('visuals.html')
 
 
 @app.route('/recommendations', methods=['POST'])
@@ -46,23 +54,18 @@ def runRecommendations():
 
 # Embedding a plotly sample chart into the application
 # Use route {host}/recommended to see it
-# TODO: replace this with Samir's interactive plot
 @app.route('/recommended')
-def plotly_graph():
-    df = pd.DataFrame({
-        "Fruit": ["Apples", "Oranges", "Bananas", "Apples", "Oranges", "Bananas"],
-        "Amount": [4, 1, 2, 2, 4, 5],
-        "City": ["SF", "SF", "SF", "Montreal", "Montreal", "Montreal"]
-    })
+def plot_recommendations():
+    counties = get_county_geojson()
+    df_fips = get_county_fips("ML/Recommender/state_and_county_fips_master.csv")
+    df_recommend = get_recommendations(df_fips=df_fips, forecast_path="ML/ppsf_forecast/ppsf_forecast.csv", top_n=50)
+    fig = generate_plot(df_recommend=df_recommend, counties=counties)
 
-    fig = px.bar(df, x="Fruit", y="Amount", color="City", barmode="group")
-
-    graphJSON = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
-    header = "Cool title for graph"
+    graph_json = json.dumps(fig, cls=plotly.utils.PlotlyJSONEncoder)
+    header = "Recommendations"
     description = """
-    Cool description
-    """
-    return render_template('plotly_graph.html', graphJSON=graphJSON, header=header, description=description)
+        """
+    return render_template('plotly_graph.html', graphJSON=graph_json, header=header, description=description)
 
 
 if __name__ == "__main__":
