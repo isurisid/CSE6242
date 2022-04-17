@@ -3,7 +3,11 @@
 <head>
   <title>Recommendations</title>
   <style>
-
+        .chart{
+          padding-right: 20px;
+          position: relative;
+          margin-top:70px;
+        }
         body,
         h1, h2, h3, legend {
             margin: 0;
@@ -212,8 +216,19 @@
 </body>
 
 <script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
+
+<div id="chart1" class="chart">
 <script type="text/javascript">
-    let graphs = {{graphJSON | safe}};
-    Plotly.plot('chart', graphs, {});
+    let graph1 = {{ graphJSON1 | safe }};
+    Plotly.plot('chart1', graph1, {});
 </script>
+</div>
+
+<div id="chart2" class="chart">
+<script type="text/javascript">
+    let graph2 = {{ graphJSON2 | safe }};
+    Plotly.plot('chart2', graph2, {});
+</script>
+</div>
+
 </html>
