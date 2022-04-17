@@ -6,7 +6,11 @@ import plotly.express as px
 import pandas as pd
 from flask import Flask, request, render_template
 from ML.rp.main import reward_punishment_orchestrator
-from ML.Recommender.plot_recommendations import *
+from ML.cosine_similarity.recommender import generatePreferences
+from DataVisualization.plot_recommendations import *
+from DataVisualization.plot_covid_data import * 
+from DataVisualization.utility import *
+import os
 
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
@@ -23,6 +27,7 @@ def runRewardandPunishmentModel(user_inputs):
 
 @app.route('/')
 def home():
+    os.chdir(".")
     return render_template('index.html')
 
 
@@ -43,9 +48,10 @@ def runRecommendations():
         logging.info(f"User Preference List: {user_inputs}")
         # Make sure the user_inputs have the same form as sample_input in rp/main.py
         pivot_recommendations = runRewardandPunishmentModel(user_inputs)
-        # recommendations = generatePreferences(pivot_recommendations)
+        global final_recommendations
+        final_recommendations = generatePreferences(pivot_recommendations)
         prediction = 'This will display all the dashboards'
-        print(pivot_recommendations.head())  # just to test R&P remove later
+         # just to test R&P remove later
         return ""  # this is just to test R&P working with actual user data
         # return render_template("result.html", prediction=prediction)
 
@@ -58,11 +64,8 @@ def plot_recommendations():
     description = """
         """
     # Plot 1
-    counties = get_county_geojson()
-    df_fips = get_county_fips("ML/Recommender/state_and_county_fips_master.csv")
-    # TODO this should read dynamic data instead of static
-    df_recommend = get_recommendations(df_fips=df_fips, forecast_path="ML/ppsf_forecast/ppsf_forecast.csv", top_n=50)
-    fig_1 = generate_plot(df_recommend=df_recommend, counties=counties)
+   
+    fig_1 = generate_recommend_plot(df_recommend=final_recommendations)
 
     graph_json_1 = json.dumps(fig_1, cls=plotly.utils.PlotlyJSONEncoder)
 

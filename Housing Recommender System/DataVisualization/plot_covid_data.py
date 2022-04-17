@@ -3,10 +3,10 @@ import numpy as np
 from urllib.request import urlopen
 import json
 import plotly.express as px
-from utility import get_county_geojson, get_county_fips
+from . import utility as utility
 
 def get_covid_data():
-    df_fips = get_county_fips()
+    df_fips = utility.get_county_fips()
     df_covid = pd.read_csv("../DataExtraction/final_data/HousingRecommenderCountyAggregateDataset.csv")
     columns = ['county', 'state_code', 'daily_cases', 'percentage_fully_vaccinated']
     df_covid = pd.DataFrame(df_covid, columns=columns)
@@ -20,7 +20,7 @@ def get_covid_data():
 # called from UI
 def generate_covid_daily_cases_plot():
     df_fips_covid = get_covid_data()
-    counties = get_county_geojson()
+    counties = utility.get_county_geojson()
     
     fig = px.choropleth(
         df_fips_covid,
@@ -41,7 +41,7 @@ def generate_covid_daily_cases_plot():
 # called from UI
 def generate_percent_vaccinated_plot():
     df_fips_covid = get_covid_data()
-    counties = get_county_geojson()
+    counties = utility.get_county_geojson()
 
     fig = px.choropleth(
         df_fips_covid,
