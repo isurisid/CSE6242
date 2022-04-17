@@ -3,8 +3,6 @@
 
 <head>
 
-    <title>Housing Recommender System</title>
-
     <style>
 
         body,
@@ -12,6 +10,13 @@
             margin: 0;
             padding: 0;
         }
+        #myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
 
 
         table {
@@ -124,6 +129,7 @@
               box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
               backdrop-filter: blur(3px);
               background-color: rgba(155, 155, 155, 0.3);
+              padding-top: 50px;
         }
 
 
@@ -161,7 +167,6 @@
 			background-color: #ddd;
 			color: black;
 		}
-        }
     </style>
     <style>
 
@@ -187,10 +192,150 @@
         body, html {
             height: 100%;
             margin: 0;
+            overflow-x: hidden;
+
         }
+        .header {
+    display: block;
+    margin: 0 auto;
+    width: 150%;
+    max-width: 100%;
+    box-shadow: none;
+    background-color: rgba(255,255,255,0.5);
+    position: fixed;
+    height: 100px!important;
+    overflow: hidden;
+    z-index: 10;
+    text-align: center;
+
+}
+.main {
+    margin: 0 auto;
+    display: block;
+    height: 100%;
+    margin-top: 60px;
+}
+.mainInner{
+    display: table;
+    height: 100%;
+    width: 100%;
+    text-align: center;
+}
+.mainInner div{
+    display:table-cell;
+    vertical-align: middle;
+    font-size: 3em;
+    font-weight: bold;
+    letter-spacing: 1.25px;
+}
+#sidebarMenu {
+    height: 100%;
+    position: fixed;
+    left: 0;
+    width: 250px;
+    margin-top: 100px;
+    transform: translateX(-250px);
+    transition: transform 250ms ease-in-out;
+    /* background: linear-gradient(180deg, #8e8a87 0%, #e8cdb1 100%); */
+    background-color: rgba(255,255,255,0.5);
+    
+}
+.sidebarMenuInner{
+    margin:0;
+    border-top: 1px solid rgba(255, 255, 255, 0.10);
+    padding-top: 20px;
+}
+.sidebarMenuInner li{
+    list-style: none;
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    padding: 20px;
+    cursor: pointer;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+}
+.sidebarMenuInner li span{
+    display: block;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.50);
+}
+.sidebarMenuInner li a{
+    color: #fff;
+    text-transform: uppercase;
+    font-weight: bold;
+    cursor: pointer;
+    text-decoration: none;
+}
+input[type="checkbox"]:checked ~ #sidebarMenu {
+    transform: translateX(0);
+}
+
+input[type=checkbox] {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    display: none;
+}
+.sidebarIconToggle {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    cursor: pointer;
+    position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    top: 22px;
+    left: 15px;
+    height: 22px;
+    width: 22px;
+}
+.spinner {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+}
+.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+.diagonal.part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: left;
+}
+.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+}
 
         .bg {
-            background-image: url('/static/House.png');
+            /* background-image: url('/static/House.png'); */
 
             background-position: center-center;
             background-size: cover;
@@ -213,8 +358,8 @@
 
 
         .title {
-            color: var(--main-text-color);;
-            font-family: Arial, Helvetica, sans-serif font-size: 50px;
+            color: var(--main-text-color);
+            font-family: Arial, Helvetica, sans-serif;font-size: 50px;
         }
     </style>
 
@@ -259,7 +404,7 @@
 
         .imp_td_text {
             text-align: left;
-            #padding-left: 1em;
+            padding-left: 1em;
             width: 10%;
         }
         .image {
@@ -277,16 +422,43 @@
 </head>
 
 <body>
+    <video autoplay muted loop id="myVideo">
+        <source src="/static/video.mp4" type="video/mp4"/>
+      </video>
 
+    <div class="header">
+        <!-- <h1>Housing Recommender System</h1> -->
+        <!-- <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></> -->
+        <img align="center" class="image" src="/static/logogo.png" border="0" alt="Logo"></>
+
+    </div>
+    <!-- <title>Housing Recommender System</title> -->
+
+  <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+      <li><a href = "about">About</a></li>
+      <li><a href="visuals" >Visualizations</a></li>
+      <li><a href="#" target="_blank">The Team</a></li>
+
+    </ul>
+  </div>
     <div class="bg">
-       <div id="navlist">
+       <!-- <div id="navlist">
 	    	<a href="/">Home</a>
-        <a href="{{ url_for('visuals') }}">Visuals</a>
-            <a href="{{ url_for('About') }}">About</a>
+        <a href="visuals.html">Visuals</a>
+            <a href="About.html">About</a>
             <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
             <br /><br /><br />
 
-       </div>
+       </div> -->
+
+
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
                 <div class="card-heading"></div>
@@ -362,20 +534,6 @@
                                     <span id="demo2" >  </span>
                                 </td>
                             </tr>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
                             <tr>
                                 <td style="padding-bottom: 16pt; padding-top: 16pt;vertical-align:middle">
