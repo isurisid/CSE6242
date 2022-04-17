@@ -21,7 +21,9 @@ def get_covid_data():
 def generate_covid_daily_cases_plot():
     df_fips_covid = get_covid_data()
     counties = utility.get_county_geojson()
-    
+    df_fips_covid['Info'] = 'County - ' + df_fips_covid['county'] + '<br>' + 'State - ' + df_fips_covid['state'] + '<br>' + \
+        'Daily cases - ' + df_fips_covid['daily_cases'].astype('str')
+
     fig = px.choropleth(
         df_fips_covid,
         geojson=counties,
@@ -34,14 +36,25 @@ def generate_covid_daily_cases_plot():
         hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated'],
         title='Average Daily COVID cases'
     )
+    fig.add_scattergeo(
+        geojson=counties,
+        locations = df_fips_covid['fips'],
+        hovertext = df_fips_covid['Info'],
+        hoverinfo = 'text',
+        marker = dict(color = '#553355', size = 0.1),
+        showlegend=False)
+
+    fig.update_traces(text = "white")
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return fig
 
 # plot percentage vaccinated
 # called from UI
 def generate_percent_vaccinated_plot():
-    df_fips_covid = get_covid_data()
+    df_fips_covid = get_covid_data().dropna().reset_index()
     counties = utility.get_county_geojson()
+    df_fips_covid['Info'] = 'County - ' + df_fips_covid['county'] + '<br>' + 'State - ' + df_fips_covid['state'] + '<br>' + \
+    'Percent Vaccinated - ' + df_fips_covid['percentage_fully_vaccinated'].astype(int).astype('str') + '%'
 
     fig = px.choropleth(
         df_fips_covid,
@@ -55,5 +68,14 @@ def generate_percent_vaccinated_plot():
         hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated'],
         title='Percentage of county vaccinated'
     )
+    fig.add_scattergeo(
+    geojson=counties,
+    locations = df_fips_covid['fips'],
+    hovertext = df_fips_covid['Info'],
+    hoverinfo = 'text',
+    marker = dict(color = '#553355', size = 0.1),
+    showlegend=False)
+
+    fig.update_traces(text = "white")
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return fig
