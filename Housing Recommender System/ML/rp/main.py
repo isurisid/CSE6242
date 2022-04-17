@@ -5,17 +5,15 @@ import pandas as pd
 from typing import Callable
 
 # Imports
-from . import  median_ppsf as median_ppsf
-from . import  median_sale_price as median_sale_price
-from . import  percentage_fully_vaccinated as percentage_fully_vaccinated
-from . import school_rating as school_rating
-from . import  tax_burden as tax_burden
-
-
+from functions import median_ppsf as median_ppsf
+from functions import median_sale_price as median_sale_price
+from functions import percentage_fully_vaccinated as percentage_fully_vaccinated
+from functions import school_rating as school_rating
+from functions import tax_burden as tax_burden
 
 # Reading the data
 # ? WARNING: this might change in the future depending on data location
-#dataset = pd.read_csv( "../data/v2-HousingRecommenderFinalDataset.csv")
+# dataset = pd.read_csv( "../data/v2-HousingRecommenderFinalDataset.csv")
 # this multiplier can be changed if we consider to change importance's weight
 IMPORTANCE_MULTIPLIER = 1.0
 # Columns to index results
@@ -52,36 +50,36 @@ def remove_special_characters(raw_string: str) -> str:
 
 
 def sanitize_input(raw_input: dict) -> dict:
-    clean_input = {}
+    clean_input = {
+        'tax_burden': {
+            'value': raw_input.get('TaxBurden', None),
+            'importance': raw_input.get('Tax Importance', None)
+        },
+        'percentage_fully_vaccinated': {
+            'value': raw_input.get('Vaccinated', None),
+            'importance': raw_input.get('Vaccinated Importance', None)
+        },
+        'elementary_school_rating': {
+            'value': raw_input.get('Elementary', None),
+            'importance': raw_input.get('Elementary Importance', None)
+        },
+        'middle_school_rating': {
+            'value': raw_input.get('Middle', None),
+            'importance': raw_input.get('Middle Importance', None)
+        },
+        'high_school_rating': {
+            'value': raw_input.get('High', None),
+            'importance': raw_input.get('High Importance', None)
+        }
+    }
     # ? Fields compatible with R&P
-    clean_input['median_sale_price'] = {
-        'value': raw_input.get('Price', None),
-        'importance': raw_input.get('Price Importance', None)
-    }
-    clean_input['tax_burden'] = {
-        'value': raw_input.get('TaxBurden', None),
-        'importance': raw_input.get('Tax Importance', None)
-    }
-    clean_input['percentage_fully_vaccinated'] = {
-        'value': raw_input.get('Vaccinated', None),
-        'importance': raw_input.get('Vaccinated Importance', None)
-    }
-    # !WARNING: uncomment this once school ratings are added to the dataset
-    # clean_input['elementary_school_rating'] = {
-    #     'value': raw_input.get('Elementary', None),
-    #     'importance': raw_input.get('Elementary Importance', None)
-    # }
-    # clean_input['middle_school_rating'] = {
-    #     'value': raw_input.get('Middle', None),
-    #     'importance': raw_input.get('Middle Importance', None)
-    # }
-    # clean_input['high_school_rating'] = {
-    #     'value': raw_input.get('High', None),
-    #     'importance': raw_input.get('High Importance', None)
-    # }
 
     # !WARNING: all the following fields are not compatible with R&P
-    # !WARNING: uncomment this once this columns are added to the R&P models
+    # !WARNING: uncomment this once these columns are added to the R&P models
+    # clean_input['median_sale_price'] = {
+    #     'value': raw_input.get('Price', None),
+    #     'importance': raw_input.get('Price Importance', None)
+    # }
     # clean_input['property_type'] = {
     #     'value': raw_input.get('House', None),
     #     'importance': raw_input.get('House Importance', None)
@@ -104,7 +102,7 @@ def sanitize_input(raw_input: dict) -> dict:
     final_input = {}
     for user_column, user_input in clean_input.items():
         if (user_input['value'] is None) or (user_input['importance'] is None):
-            print(f"Field: {user_column} could not be parsed")
+            print(f"Field: '{user_column}' is not provided")
             continue
         try:
             final_input[user_column] = {
@@ -112,7 +110,7 @@ def sanitize_input(raw_input: dict) -> dict:
                 'importance': float(user_input['importance'])
             }
         except ValueError:
-            print(f"Field: {user_column} could not be parsed")
+            print(f"Field: '{user_column}' could not be casted into float")
 
     return final_input
 
@@ -148,7 +146,7 @@ def calculate_coefficients(
 
 
 def get_rp_function(column: str) -> Callable[[float, float], float]:
-    rp_function = Callable[[float, float], float]
+    # rp_function = Callable[[float, float], float]
     if column == 'median_ppsf':
         rp_function = median_ppsf.reward_and_punishment
     elif column == 'median_sale_price':
@@ -195,13 +193,14 @@ def main(original_df: pd.DataFrame, preferences_data: dict):
     )
 
 
-def reward_punishment_orchestrator(dataset,user_input):
-    preferences=sanitize_input(user_input)
-    reward_punishment_recommendations=main(dataset,preferences)
+def reward_punishment_orchestrator(dataset, user_input):
+    preferences = sanitize_input(user_input)
+    reward_punishment_recommendations = main(dataset, preferences)
     return reward_punishment_recommendations
 
-'''
-if __name__ == '__main__':
+
+"""if __name__ == '__main__':
+    dataset = pd.read_csv("data/rp-final-dataset.csv")
     sample_preferences = sanitize_input(raw_input=sample_input)
     final_df = main(original_df=dataset, preferences_data=sample_preferences)
-'''
+    final_df.head(5)"""

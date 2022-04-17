@@ -5,7 +5,7 @@ import plotly
 import plotly.express as px
 import pandas as pd
 from flask import Flask, request, render_template
-from ML.rp.functions.main import reward_punishment_orchestrator
+from ML.rp.main import reward_punishment_orchestrator
 from ML.Recommender.plot_recommendations import *
 
 app = Flask(__name__)
@@ -14,8 +14,8 @@ app.config['JSON_SORT_KEYS'] = False
 
 def runRewardandPunishmentModel(user_inputs):
     logging.info("Running Reward and Punishment Model..")
-    dataset=pd.read_csv("./ML/rp/data/v2-HousingRecommenderFinalDataset.csv")
-    pivot_recommendations=reward_punishment_orchestrator(dataset,user_inputs)
+    dataset = pd.read_csv("ML/rp/data/rp-final-dataset.csv")
+    pivot_recommendations = reward_punishment_orchestrator(dataset, user_inputs)
     logging.info(f"Pivot Recommendations {pivot_recommendations}")
     return pivot_recommendations
 
@@ -37,11 +37,11 @@ def visuals():
 
 @app.route('/recommendations', methods=['POST'])
 def runRecommendations():
-    if request.method=='POST':
+    if request.method == 'POST':
         user_inputs = request.form.to_dict()
         logging.info(f"User Preference List: {user_inputs}")
-       # pivot_recommendations=runRewardandPunishmentModel(user_inputs)
-       # recommendations=generatePreferences(pivot_recommendations)
+        # pivot_recommendations=runRewardandPunishmentModel(user_inputs)
+        # recommendations=generatePreferences(pivot_recommendations)
         prediction ='This will display all the dashboards'
         return render_template("result.html", prediction = prediction)
 
