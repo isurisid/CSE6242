@@ -231,4 +231,11 @@
 </script>
 </div>
 
+<div id="chart3" class="chart">
+    <script type="text/javascript">
+        let graph3 = {{ graphJSON3 | safe }};
+        Plotly.plot('chart3', graph3, {});
+</script>
+</div>
+
 </html>
