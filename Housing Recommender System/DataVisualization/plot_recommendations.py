@@ -39,14 +39,19 @@ def generate_recommend_plot(df_recommend):
             title='Recommended Counties based on your input')
 
     fig.add_scattergeo(
-            geojson=counties,
-            locations = df_fips_recommend['fips'].head(20),
-            text = df_fips_recommend['county'].head(20),
-            mode = 'text',
-            hovertext = df_fips_recommend['Info'],
-            hoverinfo = 'text',
-            showlegend=False)
-
+        geojson=counties,
+        locations = df_fips_recommend['fips'][:20],
+        text = df_fips_recommend['county'][:20],
+        mode = 'text',
+        showlegend=False)
+        
+    fig.add_scattergeo(
+        geojson=counties,
+        locations = df_fips_recommend['fips'],
+        hovertext = df_fips_recommend['Info'],
+        hoverinfo = 'text',
+        marker = dict(color = '#b2d2cf', size = 0.1),
+        showlegend=False)
 
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return fig
