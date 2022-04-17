@@ -1,4 +1,3 @@
-
 import numpy as np
 import json
 import logging
@@ -53,6 +52,7 @@ def runRecommendations():
 def plot_recommendations():
     counties = get_county_geojson()
     df_fips = get_county_fips("ML/Recommender/state_and_county_fips_master.csv")
+    # TODO this should read dynamic data instead of static
     df_recommend = get_recommendations(df_fips=df_fips, forecast_path="ML/ppsf_forecast/ppsf_forecast.csv", top_n=50)
     fig = generate_plot(df_recommend=df_recommend, counties=counties)
 
