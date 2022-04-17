@@ -47,7 +47,7 @@ def getDataset():
 
 
 def getGroupedDf(df):
-    grouped_df=df.groupby(['county','state']).agg(median_ppsf=("median_ppsf","mean"),percentage_fully_vaccinated=("percentage_fully_vaccinated","mean"),total_tax_burden=("tax_burden",pd.Series.mode),risk_index=("risk_index",pd.Series.mode),cost_of_living_rank=("cost_of_living_rank",pd.Series.mode),median_age=("medianage",np.median),elementary_school_rating=("elementary_school_rating","mean"),middle_school_rating=("middle_school_rating","mean"),high_school_rating=("high_school_rating","mean"))
+    grouped_df=df.groupby(['county','state_code']).agg(median_ppsf=("median_ppsf","mean"),percentage_fully_vaccinated=("percentage_fully_vaccinated","mean"),total_tax_burden=("tax_burden",pd.Series.mode),risk_index=("risk_index",pd.Series.mode),cost_of_living_rank=("cost_of_living_rank",pd.Series.mode),median_age=("medianage",np.median),elementary_school_rating=("elementary_school_rating","mean"),middle_school_rating=("middle_school_rating","mean"),high_school_rating=("high_school_rating","mean"))
     grouped_df=grouped_df.astype(object)
     grouped_df=grouped_df.dropna()
     return grouped_df
@@ -65,6 +65,7 @@ def generatePreferences(pivotRecommendations):
     new_df['sim']=new_df['sim'].apply(lambda x: Decimal(x))
     new_df=new_df['sim'].reset_index()
     new_df['rank'] = new_df['sim'].rank(ascending = 0).astype(int)
-    new_df=new_df[['county','state','rank']]
+    new_df=new_df[['county','state_code','rank']]
     new_df['IsTop20'] = np.where(new_df['rank']<= 19, 1, 0).astype("str")
+    new_df.rename(columns={'state_code':'state'}, inplace=True)
     return new_df

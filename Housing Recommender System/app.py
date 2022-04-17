@@ -82,7 +82,7 @@ def plot_recommendations():
     return render_template(
         'plotly_graphs.html',
         graphJSON1=graph_json_1,
-        graphJSON2=graph_json_2,
+     #   graphJSON2=graph_json_2,
         header=header,
         description=description
     )
