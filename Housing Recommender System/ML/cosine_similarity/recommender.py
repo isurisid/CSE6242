@@ -1,7 +1,5 @@
 import pandas as pd
 import numpy as np
-from scipy.sparse import csr_matrix
-from scipy.sparse.linalg import svds
 from sklearn.metrics.pairwise import cosine_similarity
 import random
 from numpy import dot
@@ -35,6 +33,7 @@ class CBRecommend():
         print(inputVec)
         inputVec=np.array(inputVec)
         self.df['sim']= self.df.apply(lambda x: self.cosine_sim(inputVec, np.array(x.astype(object).values)), axis=1)
+        #print(self.df)
         #self.df['euclidean_distance']=self.df.apply(lambda x: self.l2Norm(inputVec,x.astype(object).values),axis=1)
         return self.df.nlargest(n_rec,"sim")
 
@@ -54,18 +53,16 @@ def getGroupedDf(df):
 
 def generatePreferences(pivotRecommendations):
     pr=pivotRecommendations
-    print("PIVOT RECOMMMENDATIONS.................")
-    print(pr.index[0])
-    #print(pr.loc[('Baltimore County','Maryland')])
     df=getDataset()
     grouped_df=getGroupedDf(df)
-    print("GROUPED DF INDEX")
     cbr=CBRecommend(df=grouped_df)
     new_df=cbr.recommend(record=pr.index[0],n_rec=len(grouped_df))
     new_df['sim']=new_df['sim'].apply(lambda x: Decimal(x))
-    new_df=new_df['sim'].reset_index()
     new_df['rank'] = new_df['sim'].rank(ascending = 0).astype(int)
-    new_df=new_df[['county','state_code','rank']]
-    new_df['IsTop20'] = np.where(new_df['rank']<= 19, 1, 0).astype("str")
+    new_df['Within Top 20 Recommendations'] = np.where(new_df['rank']<= 19, True, False).astype("str")
+    new_df=new_df.reset_index()
     new_df.rename(columns={'state_code':'state'}, inplace=True)
+    new_df=new_df.drop(['sim'], axis=1)
+    print(f"NEW DF {new_df} ")
+    print(new_df.dtypes)
     return new_df

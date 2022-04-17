@@ -26,16 +26,14 @@ def generate_recommend_plot(df_recommend):
     print(df_fips_recommend.shape)
     counties = utility.get_county_geojson()
     df_fips_recommend['Info'] = 'Rank - ' + df_fips_recommend['rank'].astype('str') + '<br>' + \
-        'County - ' + df_fips_recommend['county'] + '<br>' + 'State - ' + df_fips_recommend['state']# + '<br>' + \
-       # 'Daily cases - ' + df_recommend['DailyCases'].astype('str') + '<br>' + \
-       # 'Percent Vaccinated - ' + round((df_recommend['PercentVaccinated'] * 100),2).astype('str') + '%'
-    print("DF RECOMMEND >>>>>>>>>>>")
+        'County - ' + df_fips_recommend['county'] + '<br>' + 'State - ' + df_fips_recommend['state'] + '<br>' + \
+        'Percent Vaccinated - ' + df_fips_recommend['percentage_fully_vaccinated'].astype(int).astype('str') + '%'
     print(df_fips_recommend)
     fig = px.choropleth(df_fips_recommend,
             geojson=counties,
             locations='fips',
-            color=df_fips_recommend['IsTop20'],
-            color_discrete_map={'1':'red', '0':'Yellow'},
+            color=df_fips_recommend['Within Top 20 Recommendations'],
+            color_discrete_map={'True':'red', 'False':'Yellow'},
             scope="usa",
             hover_data={'Info'},
             title='Recommended Counties based on your input')
