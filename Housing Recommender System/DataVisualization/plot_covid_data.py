@@ -7,7 +7,7 @@ from . import utility as utility
 
 def get_covid_data():
     df_fips = utility.get_county_fips()
-    df_covid = pd.read_csv("../DataExtraction/final_data/HousingRecommenderCountyAggregateDataset.csv")
+    df_covid = pd.read_csv("./DataExtraction/final_data/HousingRecommenderCountyAggregateDataset.csv")
     columns = ['county', 'state_code', 'daily_cases', 'percentage_fully_vaccinated']
     df_covid = pd.DataFrame(df_covid, columns=columns)
     df_covid = df_covid.rename(columns={"state_code": "state"})
@@ -49,7 +49,7 @@ def generate_percent_vaccinated_plot():
         locations='fips',
         color=df_fips_covid['percentage_fully_vaccinated'],
         color_continuous_scale="RdYlGn",
-        range_color=(0, 1),
+        range_color=(0, 100),
         scope="usa",
         labels={'percentage_fully_vaccinated':'Percentage - county vaccinated'},
         hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated'],
