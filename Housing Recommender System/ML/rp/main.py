@@ -17,7 +17,7 @@ from . import tax_burden as tax_burden
 # this multiplier can be changed if we consider to change importance's weight
 IMPORTANCE_MULTIPLIER = 1.0
 # Columns to index results
-INDEX_COLS = ['county', 'state']
+INDEX_COLS = ['county', 'state_code']
 
 # Sample input
 sample_input = {
