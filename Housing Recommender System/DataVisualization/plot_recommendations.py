@@ -9,13 +9,8 @@ from . import utility as utility
 
 
 def get_recommendations(df_recommend):
-    print(f"DF RECOMMEND {df_recommend}")
-    print(f" DF RECOMMEND:{df_recommend.columns}")
     df_fips = utility.get_county_fips()
-    print(f"DF fips shape:{df_fips.shape}")
-    print(f" DF FIPS columns :{df_fips.columns}")
     df_merge = pd.merge(df_recommend, df_fips, on=["county", "state"])
-    print(f"MERGED DATAFRAME {df_merge}")
     df_fips_recommend = df_merge.head(100)
     return df_fips_recommend
 
@@ -50,8 +45,8 @@ def generate_recommend_plot(df_recommend):
         locations = df_fips_recommend['fips'],
         hovertext = df_fips_recommend['Info'],
         hoverinfo = 'text',
-        marker = dict(color = '#b2d2cf', size = 0.1),
+        marker = dict(color = '#553355', size = 0.1),
         showlegend=False)
-
+    fig.update_traces(text = "white")
     fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
     return fig
