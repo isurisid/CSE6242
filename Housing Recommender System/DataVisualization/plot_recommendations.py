@@ -9,13 +9,8 @@ from . import utility as utility
 
 
 def get_recommendations(df_recommend):
-    print(f"DF RECOMMEND {df_recommend}")
-    print(f" DF RECOMMEND:{df_recommend.columns}")
     df_fips = utility.get_county_fips()
-    print(f"DF fips shape:{df_fips.shape}")
-    print(f" DF FIPS columns :{df_fips.columns}")
     df_merge = pd.merge(df_recommend, df_fips, on=["county", "state"])
-    print(f"MERGED DATAFRAME {df_merge}")
     df_fips_recommend = df_merge.head(100)
     return df_fips_recommend
 
@@ -35,18 +30,22 @@ def generate_recommend_plot(df_recommend):
             color=df_fips_recommend['Within Top 20 Recommendations'],
             color_discrete_map={'True':'red', 'False':'Yellow'},
             scope="usa",
-            hover_data={'Info'},
-            title='Recommended Counties based on your input')
+            hover_data={'Info'}
+           )
 
     fig.add_scattergeo(
-            geojson=counties,
-            locations = df_fips_recommend['fips'].head(20),
-            text = df_fips_recommend['county'].head(20),
-            mode = 'text',
-            hovertext = df_fips_recommend['Info'],
-            hoverinfo = 'text',
-            showlegend=False)
-
-
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+        geojson=counties,
+        locations = df_fips_recommend['fips'][:20],
+        text = df_fips_recommend['county'][:20],
+        mode = 'text',
+        showlegend=False)
+        
+    fig.add_scattergeo(
+        geojson=counties,
+        locations = df_fips_recommend['fips'],
+        hovertext = df_fips_recommend['Info'],
+        hoverinfo = 'text',
+        marker = dict(color = '#b2d2cf', size = 0.1),
+        showlegend=False)
+    fig.update_layout(title_text = 'Recommended Counties <br> (hover over for details)')
     return fig

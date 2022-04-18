@@ -15,7 +15,6 @@ import os
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
-
 def runRewardandPunishmentModel(user_inputs):
     logging.info("Running Reward and Punishment Model..")
     # Working directory is assumed as "Housing Recommender System/"
@@ -70,19 +69,18 @@ def plot_recommendations():
     graph_json_1 = json.dumps(fig_1, cls=plotly.utils.PlotlyJSONEncoder)
 
     # Plot 2
-    df_2 = pd.DataFrame({
-        'Fruit': ['Apples', 'Oranges', 'Bananas', 'Apples', 'Oranges',
-        'Bananas'],
-        'Amount': [4, 1, 2, 2, 4, 5],
-        'City': ['SF', 'SF', 'SF', 'Montreal', 'Montreal', 'Montreal']
-    })
-    fig_2 = px.bar(df_2, x='Fruit', y='Amount', color='City', barmode='group')
+    fig_2=generate_percent_vaccinated_plot()
     graph_json_2 = json.dumps(fig_2, cls=plotly.utils.PlotlyJSONEncoder)
+
+    #Plot 3
+    fig_3=generate_covid_daily_cases_plot()
+    graph_json_3=json.dumps(fig_3,cls=plotly.utils.PlotlyJSONEncoder)
 
     return render_template(
         'plotly_graphs.html',
         graphJSON1=graph_json_1,
-     #   graphJSON2=graph_json_2,
+        graphJSON2=graph_json_2,
+        graphJSON3=graph_json_3,
         header=header,
         description=description
     )
