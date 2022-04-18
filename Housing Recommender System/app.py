@@ -15,7 +15,6 @@ import os
 app = Flask(__name__)
 app.config['JSON_SORT_KEYS'] = False
 
-
 def runRewardandPunishmentModel(user_inputs):
     logging.info("Running Reward and Punishment Model..")
     # Working directory is assumed as "Housing Recommender System/"

@@ -30,8 +30,8 @@ def generate_recommend_plot(df_recommend):
             color=df_fips_recommend['Within Top 20 Recommendations'],
             color_discrete_map={'True':'red', 'False':'Yellow'},
             scope="usa",
-            hover_data={'Info'},
-            title='Recommended Counties based on your input')
+            hover_data={'Info'}
+           )
 
     fig.add_scattergeo(
         geojson=counties,
@@ -45,8 +45,7 @@ def generate_recommend_plot(df_recommend):
         locations = df_fips_recommend['fips'],
         hovertext = df_fips_recommend['Info'],
         hoverinfo = 'text',
-        marker = dict(color = '#553355', size = 0.1),
+        marker = dict(color = '#b2d2cf', size = 0.1),
         showlegend=False)
-    fig.update_traces(text = "white")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(title_text = 'Recommended Counties <br> (hover over for details)')
     return fig

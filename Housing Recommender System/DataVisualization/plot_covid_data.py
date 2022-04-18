@@ -33,8 +33,7 @@ def generate_covid_daily_cases_plot():
         range_color=(min(df_fips_covid['daily_cases']), 25000),
         scope="usa",
         labels={'daily_cases':'Daily COVID cases'},
-        hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated'],
-        title='Average Daily COVID cases'
+        hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated']
     )
     fig.add_scattergeo(
         geojson=counties,
@@ -45,7 +44,7 @@ def generate_covid_daily_cases_plot():
         showlegend=False)
 
     fig.update_traces(text = "white")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(title_text = 'Average Daily COVID cases across US counties')
     return fig
 
 # plot percentage vaccinated
@@ -65,8 +64,7 @@ def generate_percent_vaccinated_plot():
         range_color=(0, 100),
         scope="usa",
         labels={'percentage_fully_vaccinated':'Percentage - county vaccinated'},
-        hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated'],
-        title='Percentage of county vaccinated'
+        hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated']
     )
     fig.add_scattergeo(
     geojson=counties,
@@ -77,5 +75,5 @@ def generate_percent_vaccinated_plot():
     showlegend=False)
 
     fig.update_traces(text = "white")
-    fig.update_layout(margin={"r": 0, "t": 0, "l": 0, "b": 0})
+    fig.update_layout(title_text = 'Percentage Vaccinated across US counties')
     return fig
