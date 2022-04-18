@@ -2,10 +2,9 @@ import pandas as pd
 import numpy as np
 from urllib.request import urlopen
 import json
+import plotly
 import plotly.express as px
-from . import utility as utility 
-
-
+from . import utility as utility
 
 
 def get_recommendations(df_recommend):
@@ -48,4 +47,5 @@ def generate_recommend_plot(df_recommend):
         marker = dict(color = '#b2d2cf', size = 0.1),
         showlegend=False)
     fig.update_layout(title_text = 'Recommended Counties <br> (hover over for details)')
+    plotly.offline.plot(fig,filename='./static/recommend.html',config={'displayModeBar': False}, auto_open=False)
     return fig
