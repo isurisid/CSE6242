@@ -87,9 +87,19 @@
         .btn--white {
             background: #FFFFFF;
         }
-            .btn--green:hover {
-                background: #4dae3c;
-            }
+        .btn--green:hover {
+                background: #ffffff;
+         }
+        .btn--white:hover {
+                background: #57b846;
+         }
+
+        .btn--white:focus{
+        background: #57b846;
+        }
+        .btn--green:focus{
+        background: #ffffff;
+        }
 
 
         /* ==========================================================================
@@ -254,7 +264,7 @@
        iframe {
        margin-right: 10px;
        width: 440px;
-       height: 300px;
+       height: 390px;
        margin: 0 auto;
        display: block;
        border-style:none;
@@ -303,15 +313,14 @@
         <br><br><br><br><br><br><br><br><br><br>
 
 <div id="outer">
-  <div class="inner"><button class="btn btn--radius btn--green" type="submit" onclick="changeColor()" >All</button></div>
-  <div class="inner"><button class="btn btn--radius btn--white" type="submit" onclick="changeColor()">PPSF</button></div>
-  <div class="inner"><button class="btn btn--radius btn--white" type="submit" onclick="changeColor()">School Rating</button></div>
-  <div class="inner"><button class="btn btn--radius btn--white" type="submit" onclick="changeColor()">Tax Burden</button></div>
-  <div class="inner"><button class="btn btn--radius btn--white" type="submit" onclick="changeColor()">Median Age</button></div>
+  <div class="inner"><button class="btn btn--radius btn--green" type="button" >All</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">PPSF & School Rating</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/views/Projectfinal2_16502274752200/TaxburdenDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">Tax Burden</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">Median Age</button></div>
     <br><br>
 </div>
-    <div class="frame">
-        <iframe src="https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+         <div class="frame">
+        <iframe id="iframe" src="https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
     </div>
      <div class="frame">
         <iframe src="https://public.tableau.com/views/Projectfinal2_16502274752200/TaxburdenDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
@@ -319,9 +328,4 @@
       <div class="frame">
         <iframe src="https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
       </div>
-    <script>
-    function changeColor() {
-     background: #57b846;
-    }
-    </script>
 </body>

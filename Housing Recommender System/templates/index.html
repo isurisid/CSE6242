@@ -122,6 +122,8 @@
         ========================================================================== */
         .card {
               overflow: hidden;
+              position: relative;
+              margin-top: 90px;
               -webkit-border-radius: 3px;
               -moz-border-radius: 3px;
               border-radius: 20px;
@@ -129,7 +131,7 @@
               box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
               backdrop-filter: blur(3px);
               background-color: rgba(155, 155, 155, 0.3);
-              padding-top: 50px;
+              padding-top: 0px;
         }
 
 
@@ -260,7 +262,7 @@
     color: rgba(255, 255, 255, 0.50);
 }
 .sidebarMenuInner li a{
-    color: #fff;
+    color: #0047AB;
     text-transform: uppercase;
     font-weight: bold;
     cursor: pointer;
@@ -417,6 +419,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
              right: 33%;
        }
 
+
     </style>
 
 </head>
@@ -429,7 +432,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
     <div class="header">
         <!-- <h1>Housing Recommender System</h1> -->
         <!-- <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></> -->
-        <img align="center" class="image" src="/static/logogo.png" border="0" alt="Logo"></>
+        <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
 
     </div>
     <!-- <title>Housing Recommender System</title> -->
@@ -442,9 +445,10 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
   </label>
   <div id="sidebarMenu">
     <ul class="sidebarMenuInner">
-      <li><a href = "about">About</a></li>
+      <li><a href = "/">Home</a></li>
       <li><a href="visuals" >Visualizations</a></li>
-      <li><a href="#" target="_blank">The Team</a></li>
+      <li><a href = "about">About</a></li>
+      <li><a href = "team">The Team</a></li>
 
     </ul>
   </div>
@@ -463,7 +467,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
             <div class="card card-1">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <form action="{{ url_for("runRecommendations")}}" method="POST">
+                    <form  action="{{ url_for("runRecommendations")}}" method="POST">
                         <table style="width:100%; vertical-align:middle;">
                             <tr style="text-align:center">
                                 <td colspan="2" class="title_label" style="font-size:large"><b></b></td>
@@ -477,8 +481,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Price">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="Price" >
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="$0+">$0+</option>
                                             <option value="$100,000+">$100,000+</option>
@@ -510,8 +514,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Feet">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="Feet">
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="500+">500+</option>
                                             <option value="750+">750+</option>
@@ -541,8 +545,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="TaxBurden">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="TaxBurden">
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="<1%"><1%</option>
                                             <option value="<2%"><2%</option>
@@ -576,8 +580,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Elementary">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="Elementary">
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
 
                                             <option value="1+">1+</option>
@@ -609,8 +613,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Middle">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="Middle">
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="1+">1+</option>
                                             <option value="2+">2+</option>
@@ -644,8 +648,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="High">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="High">
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="1+">1+</option>
                                             <option value="2+">2+</option>
@@ -679,8 +683,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Vaccinated">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select required name="Vaccinated">
+                                            <option value>Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="10%+">10%+</option>
                                             <option value="20%+">20%+</option>
@@ -724,6 +728,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                     outputNum[parseInt(j)].innerHTML = this.value;
                                 }
                             }
+
 
                         </script>
 

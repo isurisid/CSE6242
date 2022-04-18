@@ -1,9 +1,9 @@
-<!doctype html>
-<html>
+<!DOCTYPE html>
+<html lang="en">
+
 <head>
-  <title>Recommendations</title>
-  <style>
-        .chart{
+    <style>
+                .chart{
           padding-right: 20px;
           position: relative;
           margin-top:70px;
@@ -36,6 +36,69 @@
 
         h2 {
             font-size: 30px;
+        }
+        /* ==========================================================================
+        #SPACING FOR BUTTONS
+        ========================================================================== */
+
+        .p-t-100 {
+            padding-top: 100px;
+        }
+
+        .p-t-20 {
+            padding-top: 20px;
+            padding-left: 20px;
+        }
+
+        .p-b-100 {
+            padding-bottom: 100px;
+        }
+        /* ==========================================================================
+        # GET RECOMMENDATIONS BUTTON
+        ========================================================================== */
+        .btn {
+            line-height: 40px;
+            display: inline-block;
+            padding: 0 25px;
+            cursor: pointer;
+            font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+            color: #000;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: none;
+
+        }
+        .btn--radius {
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 10px;
+            border: 0px ;
+        }
+
+        .btn--green {
+            background: #57b846;
+        }
+
+        .btn--white {
+            background: #FFFFFF;
+        }
+        .btn--green:hover {
+                background: #ffffff;
+         }
+        .btn--white:hover {
+                background: #57b846;
+         }
+
+        .btn--white:focus{
+        background: #57b846;
+        }
+        .btn--green:focus{
+        background: #ffffff;
         }
 
         /* ==========================================================================
@@ -189,6 +252,7 @@
         }
         .image {
              background-size: 500px;
+
              background-color: transparent;
              width: 500px;
              height: 90px;
@@ -197,8 +261,9 @@
              right: 33%;
        }
        iframe {
-       width: 700px;
-       height: 500px;
+       margin-right: 10px;
+       width: 440px;
+       height: 240px;
        margin: 0 auto;
        display: block;
        border-style:none;
@@ -206,36 +271,73 @@
        background-color: transparent;
     }
 
+      .frame{
+      float:left;
+      margin:15px;
+      }
+#outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+
+.setColor(e) {
+  var target = e.target;
+   target.style.backgroundColor : '#FFFFFF';
+
+}
+
     </style>
+
+
 </head>
-<body style="font-family:arial, sans-serif">
-    <h1>{{header}}</h1>
-    <h6><a href="/">Return to index page</a></h6>
-    <div id="chart" class="chart"></div>
-    <div>{{description}}</div>
+
+
+<body>
+
+
+    <div class="bg">
+
+        <div id="navlist">
+        <a href="/">Home</a>
+        <a href="/visuals">Visualizations</a>
+        <a href="/about">About</a>
+        <a href="/team">The Team</a>
+        <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
+    </div>
+        <br><br><br><br><br><br><br><br><br><br>
+
+<div id="outer">
+  <div class="inner"><button class="btn btn--radius btn--green" type="button" >All</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">PPSF & School Rating</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/views/Projectfinal2_16502274752200/TaxburdenDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">Tax Burden</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">Median Age</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('/static/recommend.html')">Recommended Counties</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('/static/cases.html')">Covid Cases</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('/static/vaccinated.html')">Percent Vaccinated</button></div>
+  <br><br>
+</div>
+         <div class="frame">
+        <iframe id="iframe" src="https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+    </div>
+     <div class="frame">
+        <iframe src="https://public.tableau.com/views/Projectfinal2_16502274752200/TaxburdenDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+     </div>
+      <div class="frame">
+        <iframe src="https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+          <div class="frame">
+        <iframe src="/static/recommend.html":embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+          <div class="frame">
+        <iframe src="/static/cases.html":embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+          <div class="frame">
+        <iframe src="/static/vaccinated.html":embed=true" style="border: 1px solid black;"></iframe>
+      </div>
 </body>
 
-<script src="https://cdn.plot.ly/plotly-latest.min.js"></script>
-
-<div id="chart1" class="chart">
-<script type="text/javascript">
-    let graph1 = {{ graphJSON1 | safe }};
-    Plotly.plot('chart1', graph1, {});
-</script>
-</div>
-
-<div id="chart2" class="chart">
-<script type="text/javascript">
-    let graph2 = {{ graphJSON2 | safe }};
-    Plotly.plot('chart2', graph2, {});
-</script>
-</div>
-
-<div id="chart3" class="chart">
-    <script type="text/javascript">
-        let graph3 = {{ graphJSON3 | safe }};
-        Plotly.plot('chart3', graph3, {});
-</script>
-</div>
-
-</html>
