@@ -200,7 +200,7 @@
         }
 
         .bg {
-            background-image: url('/static/House.png');
+            background-image: url('../static/House.png');
             background-position: center-center;
             background-size: cover;
             background-repeat: no-repeat;
@@ -416,13 +416,28 @@ background-color:black; }
         <iframe src="https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
       </div>
       <div class="frame">
-        <iframe src="" style="border: 1px solid black;"></iframe>
+        <iframe id="iframeid1" src="../static/static.html" style="border: 1px solid black;"></iframe>
       </div>
       <div class="frame">
-        <iframe src="" style="border: 1px solid black;"></iframe>
+        <iframe id="iframeid2" src="../static/static.html" style="border: 1px solid black;"></iframe>
       </div>
       <div class="frame">
-        <iframe src="" style="border: 1px solid black;"></iframe>
+        <iframe id="iframeid3" src="../static/static.html" style="border: 1px solid black;"></iframe>
       </div>
-
 </body>
+<script>
+            setTimeout(function() {
+            var site1 = "../static/recommend.html";
+            document.getElementById('iframeid1').src = site1;
+            var site2 = "../static/cases.html";
+            document.getElementById('iframeid2').src = site2;
+            var site3 = "../static/vaccinated.html";
+            document.getElementById('iframeid3').src = site3;
+            document.getElementById("PreLoaderBar").style.display = "none";
+         }, 5000);
+
+</script>
+
+
+
+</html>

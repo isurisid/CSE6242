@@ -105,6 +105,12 @@
                 background: #4dae3c;
             }
 
+        .btn:disabled{
+           background-color:gray;
+}
+                .btn:enabled{
+           background-color:#57b846;
+}
 
         /* ==========================================================================
         #TITLE
@@ -198,90 +204,89 @@
 
         }
         .header {
-    display: block;
-    margin: 0 auto;
-    width: 150%;
-    max-width: 100%;
-    box-shadow: none;
-    background-color: rgba(255,255,255,0.5);
-    position: fixed;
-    height: 100px!important;
-    overflow: hidden;
-    z-index: 10;
-    text-align: center;
+            display: block;
+            margin: 0 auto;
+            width: 150%;
+            max-width: 100%;
+            box-shadow: none;
+            background-color: rgba(255,255,255,0.5);
+            position: fixed;
+            height: 100px!important;
+            overflow: hidden;
+            z-index: 10;
+            text-align: center;
 
-}
-.main {
-    margin: 0 auto;
-    display: block;
-    height: 100%;
-    margin-top: 60px;
-}
-.mainInner{
-    display: table;
-    height: 100%;
-    width: 100%;
-    text-align: center;
-}
-.mainInner div{
-    display:table-cell;
-    vertical-align: middle;
-    font-size: 3em;
-    font-weight: bold;
-    letter-spacing: 1.25px;
-}
-#sidebarMenu {
-    height: 100%;
-    position: fixed;
-    left: 0;
-    width: 250px;
-    margin-top: 100px;
-    transform: translateX(-250px);
-    transition: transform 250ms ease-in-out;
-    /* background: linear-gradient(180deg, #8e8a87 0%, #e8cdb1 100%); */
-    background-color: rgba(255,255,255,0.5);
+        }
+       .main {
+            margin: 0 auto;
+            display: block;
+            height: 100%;
+            margin-top: 60px;
+        }
+       .mainInner{
+            display: table;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+       }
+       .mainInner div{
+           display:table-cell;
+           vertical-align: middle;
+           font-size: 3em;
+           font-weight: bold;
+           letter-spacing: 1.25px;
+       }
+       #sidebarMenu {
+          height: 100%;
+          position: fixed;
+          left: 0;
+          width: 250px;
+          margin-top: 100px;
+          transform: translateX(-250px);
+          transition: transform 250ms ease-in-out;
+          background-color: rgba(255,255,255,0.5);
     
-}
-.sidebarMenuInner{
-    margin:0;
-    border-top: 1px solid rgba(255, 255, 255, 0.10);
-    padding-top: 20px;
-}
-.sidebarMenuInner li{
-    list-style: none;
-    color: #fff;
-    text-transform: uppercase;
-    font-weight: bold;
-    padding: 20px;
-    cursor: pointer;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.10);
-}
-.sidebarMenuInner li span{
-    display: block;
-    font-size: 14px;
-    color: rgba(255, 255, 255, 0.50);
-}
-.sidebarMenuInner li a{
-    color: #0047AB;
-    text-transform: uppercase;
-    font-weight: bold;
-    cursor: pointer;
-    text-decoration: none;
-}
-input[type="checkbox"]:checked ~ #sidebarMenu {
-    transform: translateX(0);
-}
+        }
+        .sidebarMenuInner{
+           margin:0;
+           border-top: 1px solid rgba(255, 255, 255, 0.10);
+           padding-top: 20px;
+        }
+        .sidebarMenuInner li{
+            list-style: none;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        .sidebarMenuInner li span{
+            display: block;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.50);
+        }
+        .sidebarMenuInner li a{
+             color: #0047AB;
+             text-transform: uppercase;
+             font-weight: bold;
+             cursor: pointer;
+             text-decoration: none;
+        }
+        input[type="checkbox"]:checked ~ #sidebarMenu {
+             transform: translateX(0);
+        }
 
-input[type=checkbox] {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    display: none;
-}
-.sidebarIconToggle {
-    transition: all 0.3s;
-    box-sizing: border-box;
-    cursor: pointer;
-    position: absolute;
+        input[type=checkbox] {
+           transition: all 0.3s;
+           box-sizing: border-box;
+           display: none;
+        }
+        .sidebarIconToggle {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          cursor: pointer;
+            position: absolute;
     z-index: 99;
     height: 100%;
     width: 100%;
@@ -419,7 +424,6 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
              right: 33%;
        }
 
-
     </style>
 
 </head>
@@ -481,8 +485,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="Price" >
-                                            <option value>Select</option>
+                                        <select id="PriceType" required name="Price" >
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="$0+">$0+</option>
                                             <option value="$100,000+">$100,000+</option>
@@ -514,8 +518,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="Feet">
-                                            <option value>Select</option>
+                                        <select id="FeetType" required name="Feet">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="500+">500+</option>
                                             <option value="750+">750+</option>
@@ -545,8 +549,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="TaxBurden">
-                                            <option value>Select</option>
+                                        <select id="TaxBurdenType" required name="TaxBurden">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="<1%"><1%</option>
                                             <option value="<2%"><2%</option>
@@ -580,8 +584,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="Elementary">
-                                            <option value>Select</option>
+                                        <select id="ElementaryType" required name="Elementary">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
 
                                             <option value="1+">1+</option>
@@ -613,8 +617,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="Middle">
-                                            <option value>Select</option>
+                                        <select id="MiddleType" required name="Middle">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="1+">1+</option>
                                             <option value="2+">2+</option>
@@ -648,8 +652,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="High">
-                                            <option value>Select</option>
+                                        <select id="HighType" required name="High">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="1+">1+</option>
                                             <option value="2+">2+</option>
@@ -683,8 +687,8 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select required name="Vaccinated">
-                                            <option value>Select</option>
+                                        <select id="VaccinatedType" required name="Vaccinated">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="10%+">10%+</option>
                                             <option value="20%+">20%+</option>
@@ -709,13 +713,22 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align:center">
-                                    <div class="p-t-20"><button class="btn btn--radius btn--green" type="submit">Get Recommendations</button></div>
+                                    <div class="p-t-20"><button id="GetRec" class="btn btn--radius .btn--green" type="submit" onclick="window.open('/static/result.html')">Get Recommendations</button></div>
                                 </td>
                             </tr>
 
                         </table>
 
-                        <script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+          $('.selbox').on('change', function() {
+          var $sels = $('.selbox option:selected[value="Select"]');
+           $("#GetRec").attr("disabled", $sels.length > 0);
+  }).change();
+});
+    </script>
+                    <script>
                             var allSliders = [];
                             var outputNum = [];
                             for (i = 1; i <= 7; i++) {
@@ -728,11 +741,7 @@ input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
                                     outputNum[parseInt(j)].innerHTML = this.value;
                                 }
                             }
-
-
                         </script>
-
-
                     </form>
                     {{Predict_score}}
                 </div>
