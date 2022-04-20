@@ -59,7 +59,7 @@ def generatePreferences(pivotRecommendations):
     new_df=cbr.recommend(record=pr.index[0],n_rec=len(grouped_df))
     new_df['sim']=new_df['sim'].apply(lambda x: Decimal(x))
     new_df['rank'] = new_df['sim'].rank(ascending = 0).astype(int)
-    new_df['Within Top 20 Recommendations'] = np.where(new_df['rank']<= 19, True, False).astype("str")
+    new_df['Top 20'] = np.where(new_df['rank']<= 19, True, False).astype("str")
     new_df=new_df.reset_index()
     new_df.rename(columns={'state_code':'state'}, inplace=True)
     new_df=new_df.drop(['sim'], axis=1)
