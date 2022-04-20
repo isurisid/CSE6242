@@ -3,8 +3,6 @@
 
 <head>
 
-    <title>Housing Recommender System</title>
-
     <style>
 
         body,
@@ -12,6 +10,13 @@
             margin: 0;
             padding: 0;
         }
+        #myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%; 
+  min-height: 100%;
+}
 
 
         table {
@@ -100,6 +105,12 @@
                 background: #4dae3c;
             }
 
+        .btn:disabled{
+           background-color:gray;
+}
+                .btn:enabled{
+           background-color:#57b846;
+}
 
         /* ==========================================================================
         #TITLE
@@ -117,6 +128,8 @@
         ========================================================================== */
         .card {
               overflow: hidden;
+              position: relative;
+              margin-top: 90px;
               -webkit-border-radius: 3px;
               -moz-border-radius: 3px;
               border-radius: 20px;
@@ -124,6 +137,7 @@
               box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
               backdrop-filter: blur(3px);
               background-color: rgba(155, 155, 155, 0.3);
+              padding-top: 0px;
         }
 
 
@@ -186,10 +200,149 @@
         body, html {
             height: 100%;
             margin: 0;
+            overflow-x: hidden;
+
+        }
+        .header {
+            display: block;
+            margin: 0 auto;
+            width: 150%;
+            max-width: 100%;
+            box-shadow: none;
+            background-color: rgba(255,255,255,0.5);
+            position: fixed;
+            height: 100px!important;
+            overflow: hidden;
+            z-index: 10;
+            text-align: center;
+
+        }
+       .main {
+            margin: 0 auto;
+            display: block;
+            height: 100%;
+            margin-top: 60px;
+        }
+       .mainInner{
+            display: table;
+            height: 100%;
+            width: 100%;
+            text-align: center;
+       }
+       .mainInner div{
+           display:table-cell;
+           vertical-align: middle;
+           font-size: 3em;
+           font-weight: bold;
+           letter-spacing: 1.25px;
+       }
+       #sidebarMenu {
+          height: 100%;
+          position: fixed;
+          left: 0;
+          width: 250px;
+          margin-top: 100px;
+          transform: translateX(-250px);
+          transition: transform 250ms ease-in-out;
+          background-color: rgba(255,255,255,0.5);
+    
+        }
+        .sidebarMenuInner{
+           margin:0;
+           border-top: 1px solid rgba(255, 255, 255, 0.10);
+           padding-top: 20px;
+        }
+        .sidebarMenuInner li{
+            list-style: none;
+            color: #fff;
+            text-transform: uppercase;
+            font-weight: bold;
+            padding: 20px;
+            cursor: pointer;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.10);
+        }
+        .sidebarMenuInner li span{
+            display: block;
+            font-size: 14px;
+            color: rgba(255, 255, 255, 0.50);
+        }
+        .sidebarMenuInner li a{
+             color: #0047AB;
+             text-transform: uppercase;
+             font-weight: bold;
+             cursor: pointer;
+             text-decoration: none;
+        }
+        input[type="checkbox"]:checked ~ #sidebarMenu {
+             transform: translateX(0);
         }
 
+        input[type=checkbox] {
+           transition: all 0.3s;
+           box-sizing: border-box;
+           display: none;
+        }
+        .sidebarIconToggle {
+          transition: all 0.3s;
+          box-sizing: border-box;
+          cursor: pointer;
+            position: absolute;
+    z-index: 99;
+    height: 100%;
+    width: 100%;
+    top: 22px;
+    left: 15px;
+    height: 22px;
+    width: 22px;
+}
+.spinner {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: absolute;
+    height: 3px;
+    width: 100%;
+    background-color: #fff;
+}
+.horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+.diagonal.part-1 {
+    position: relative;
+    transition: all 0.3s;
+    box-sizing: border-box;
+    float: left;
+}
+.diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    position: relative;
+    float: left;
+    margin-top: 3px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .horizontal {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    opacity: 0;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-1 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(135deg);
+    margin-top: 8px;
+}
+input[type=checkbox]:checked ~ .sidebarIconToggle > .diagonal.part-2 {
+    transition: all 0.3s;
+    box-sizing: border-box;
+    transform: rotate(-135deg);
+    margin-top: -9px;
+}
+
         .bg {
-            background-image: url('/static/House.png');
+            /* background-image: url('/static/House.png'); */
 
             background-position: center-center;
             background-size: cover;
@@ -276,21 +429,49 @@
 </head>
 
 <body>
+    <video autoplay muted loop id="myVideo">
+        <source src="/static/video.mp4" type="video/mp4"/>
+      </video>
 
+    <div class="header">
+        <!-- <h1>Housing Recommender System</h1> -->
+        <!-- <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></> -->
+        <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
+
+    </div>
+    <!-- <title>Housing Recommender System</title> -->
+
+  <input type="checkbox" class="openSidebarMenu" id="openSidebarMenu">
+  <label for="openSidebarMenu" class="sidebarIconToggle">
+    <div class="spinner diagonal part-1"></div>
+    <div class="spinner horizontal"></div>
+    <div class="spinner diagonal part-2"></div>
+  </label>
+  <div id="sidebarMenu">
+    <ul class="sidebarMenuInner">
+      <li><a href = "/">Home</a></li>
+      <li><a href="visuals" >Visualizations</a></li>
+      <li><a href = "about">About</a></li>
+      <li><a href = "team">The Team</a></li>
+
+    </ul>
+  </div>
     <div class="bg">
-       <div id="navlist">
+       <!-- <div id="navlist">
 	    	<a href="/">Home</a>
         <a href="visuals.html">Visuals</a>
             <a href="About.html">About</a>
             <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
             <br /><br /><br />
 
-       </div>
+       </div> -->
+
+
         <div class="wrapper wrapper--w680">
             <div class="card card-1">
                 <div class="card-heading"></div>
                 <div class="card-body">
-                    <form action="{{ url_for("runRecommendations")}}" method="POST">
+                    <form  action="{{ url_for("runRecommendations")}}" method="POST">
                         <table style="width:100%; vertical-align:middle;">
                             <tr style="text-align:center">
                                 <td colspan="2" class="title_label" style="font-size:large"><b></b></td>
@@ -304,8 +485,8 @@
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Price">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="PriceType" required name="Price" >
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="$0+">$0+</option>
                                             <option value="$100,000+">$100,000+</option>
@@ -337,8 +518,8 @@
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Feet">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="FeetType" required name="Feet">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="500+">500+</option>
                                             <option value="750+">750+</option>
@@ -362,28 +543,14 @@
                                 </td>
                             </tr>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
                             <tr>
                                 <td style="padding-bottom: 16pt; padding-top: 16pt;vertical-align:middle">
                                     <label class="title_label" for="TaxBurden">Tax Burden</label>
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="TaxBurden">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="TaxBurdenType" required name="TaxBurden">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="<1%"><1%</option>
                                             <option value="<2%"><2%</option>
@@ -417,8 +584,8 @@
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Elementary">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="ElementaryType" required name="Elementary">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
 
                                             <option value="1+">1+</option>
@@ -450,8 +617,8 @@
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Middle">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="MiddleType" required name="Middle">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="1+">1+</option>
                                             <option value="2+">2+</option>
@@ -485,8 +652,8 @@
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="High">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="HighType" required name="High">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="1+">1+</option>
                                             <option value="2+">2+</option>
@@ -520,8 +687,8 @@
                                 </td>
                                 <td>
                                     <div class="selbox">
-                                        <select name="Vaccinated">
-                                            <option disabled="disabled" selected="selected">Select</option>
+                                        <select id="VaccinatedType" required name="Vaccinated">
+                                            <option value="Select">Select</option>
                                             <option value="No Preference">No Preference</option>
                                             <option value="10%+">10%+</option>
                                             <option value="20%+">20%+</option>
@@ -546,13 +713,22 @@
                             </tr>
                             <tr>
                                 <td colspan="4" style="text-align:center">
-                                    <div class="p-t-20"><button class="btn btn--radius btn--green" type="submit">Get Recommendations</button></div>
+                                    <div class="p-t-20"><button id="GetRec" class="btn btn--radius .btn--green" type="submit" onclick="window.open('/static/result.html')">Get Recommendations</button></div>
                                 </td>
                             </tr>
 
                         </table>
 
-                        <script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <script type="text/javascript">
+    $(function() {
+          $('.selbox').on('change', function() {
+          var $sels = $('.selbox option:selected[value="Select"]');
+           $("#GetRec").attr("disabled", $sels.length > 0);
+  }).change();
+});
+    </script>
+                    <script>
                             var allSliders = [];
                             var outputNum = [];
                             for (i = 1; i <= 7; i++) {
@@ -565,10 +741,7 @@
                                     outputNum[parseInt(j)].innerHTML = this.value;
                                 }
                             }
-
                         </script>
-
-
                     </form>
                     {{Predict_score}}
                 </div>

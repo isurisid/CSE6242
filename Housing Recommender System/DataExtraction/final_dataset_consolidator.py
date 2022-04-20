@@ -24,11 +24,10 @@ def get_final_dataset():
     print(dfinal.columns)
     return dfinal
 
-def get_point_in_time_dataset():
+def get_county_aggregated_dataset():
     dfinal=get_final_dataset()
     df_subset=dfinal[['county', 'state', 'state_code', 'tax_burden', 'medianage', 'cost_of_living_rank','elementary_school_rating', 'middle_school_rating','high_school_rating', 'daily_cases', 'percentage_fully_vaccinated','risk_index', 'risk']]
     df_unique = df_subset.groupby(by=['county','state_code'], as_index=False).first()
-    df_unique.to_csv("./final_data/HousingRecommenderPointInTimeDataset.csv",index=False)
+    df_unique.to_csv("./final_data/HousingRecommenderCountyAggregateDataset.csv",index=False)
     return df_unique
 
-get_point_in_time_dataset()

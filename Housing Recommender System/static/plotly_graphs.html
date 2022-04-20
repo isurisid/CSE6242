@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+     <title>Housing Recommender System</title>
+    <style>
+                .chart{
+          padding-right: 20px;
+          position: relative;
+          margin-top:70px;
+        }
+        body,
+        h1, h2, h3, legend {
+            margin: 0;
+            padding: 0;
+        }
+
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        body {
+            font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+            font-weight: 400;
+            font-size: 14px;
+        }
+
+        h1, h2 {
+            font-weight: 400;
+        }
+
+        h1 {
+            font-size: 36px;
+        }
+
+        h2 {
+            font-size: 30px;
+        }
+        /* ==========================================================================
+        #SPACING FOR BUTTONS
+        ========================================================================== */
+
+        .p-t-100 {
+            padding-top: 100px;
+        }
+
+        .p-t-20 {
+            padding-top: 20px;
+            padding-left: 20px;
+        }
+
+        .p-b-100 {
+            padding-bottom: 100px;
+        }
+        /* ==========================================================================
+        # GET RECOMMENDATIONS BUTTON
+        ========================================================================== */
+        .btn {
+            line-height: 40px;
+            display: inline-block;
+            padding: 0 25px;
+            cursor: pointer;
+            font-family: "Roboto", "Arial", "Helvetica Neue", sans-serif;
+            color: #000;
+            -webkit-transition: all 0.4s ease;
+            -o-transition: all 0.4s ease;
+            -moz-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+            font-size: 14px;
+            font-weight: 700;
+            text-align: center;
+            box-shadow: none;
+
+        }
+        .btn--radius {
+            -webkit-border-radius: 3px;
+            -moz-border-radius: 3px;
+            border-radius: 10px;
+            border: 0px ;
+        }
+
+        .btn--green {
+            background: #57b846;
+        }
+
+        .btn--white {
+            background: #FFFFFF;
+        }
+        .btn--green:hover {
+                background: #ffffff;
+         }
+        .btn--white:hover {
+                background: #57b846;
+         }
+
+        .btn--white:focus{
+        background: #57b846;
+        }
+        .btn--green:focus{
+        background: #ffffff;
+        }
+
+        /* ==========================================================================
+        #FIT INPUT BOX IN CENTER
+        ========================================================================== */
+        .wrapper {
+            padding-top: 70px;
+            margin: 0 auto;
+        }
+
+        .wrapper--w680 {
+            max-width: 680px;
+        }
+
+        /* ==========================================================================
+        #TITLE
+        ========================================================================== */
+        .title {
+          margin-bottom: 10px;
+          font-size: 30px;
+          margin:5px;
+          margin-right:150px;
+          font-family:arial;
+        }
+
+        /* ==========================================================================
+        #CARD FOR ENTERING USER PREFERENCES
+        ========================================================================== */
+        .card {
+              overflow: hidden;
+              -webkit-border-radius: 3px;
+              -moz-border-radius: 3px;
+              border-radius: 20px;
+              background: #FFFFFF;
+              box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+              backdrop-filter: blur(3px);
+              background-color: rgba(155, 155, 155, 0.3);
+        }
+
+
+
+        .card-1 .card-body {
+             padding: 0 70px;
+             padding-top:  10px;
+             padding-bottom: 15px;
+             background: #1a1a1a;
+             box-shadow: 0 15px 25px rgba(129, 124, 124, 0.2);
+             backdrop-filter: blur(3px);
+             background-color: rgba(255, 255, 255, 0.2);
+        }
+        /* styling navlist */
+		#navlist {
+			width: 100%;
+		}
+
+		/* styling navlist anchor element */
+		    #navlist a {
+			float:left;
+			display: block;
+			color: white;
+			text-align: center;
+			padding: 12px;
+			text-decoration: none;
+			font-size: 15px;
+		}
+		.navlist-right{
+			float:right;
+		}
+
+		/* hover effect of navlist anchor element */
+		#navlist a:hover {
+			background-color: #ddd;
+			color: black;
+		}
+
+        /* ==========================================================================
+        #BACKGROUNG IMAGE
+        ========================================================================== */
+
+        :root {
+            --gap-line-spacing: 5px;
+            --gap-line-spacing-authors: 2px;
+            --darkest-color-titles: #545454;
+            --main-text-color: #003057;
+            --light-color-section-banner-bkg: #B3A369;
+            --top-banner-color: #B3A369;
+            --gap-line-spacing-company: 2px;
+            --page-background-color: #ffffff;
+            --table-border-color: #B3A369;
+            --section-banner-text-color: #003057;
+            --font-my-theme: Helvetica;
+            --gap-right-before-links: 2em;
+        }
+
+        body, html {
+            height: 100%;
+            margin: 0;
+        }
+
+        .bg {
+            background-image: url('/static/House.png');
+            background-position: center-center;
+            background-size: cover;
+            background-repeat: no-repeat;
+            height: 100%;
+        }
+
+        .title {
+            color: var(--main-text-color);;
+            font-family: Arial, Helvetica, sans-serif;
+            font-size: 50px;
+        }
+        .container .box {
+            display: flex;
+            flex-direction: row;
+        }
+
+            .container .box .box-cell.box1 {
+                width: 80%;
+                background: white;
+                color: black;
+                text-align: justify;
+                text-shadow: 0.1px 0.1px 0.1px #000;
+                backdrop-filter: blur(0px);
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+            .container .box .box-cell.box2 {
+                width: 30%;
+                background: white;
+                text-align: justify;
+                text-shadow: 0.1px 0.1px 0.1px #000;
+                backdrop-filter: blur(0px);
+                background-color: rgba(255, 255, 255, 0);
+            }
+
+        .title_label {
+            color: var(--main-text-color);
+        }
+
+        .imp_td {
+            text-align: center;
+            padding-left: 10pt;
+            width:35%;
+        }
+
+        .imp_td_text {
+            text-align: left;
+            padding-left: 1em;
+            width: 10%;
+        }
+        .image {
+             background-size: 500px;
+
+             background-color: transparent;
+             width: 500px;
+             height: 90px;
+             position: absolute;
+             top:2%;
+             right: 33%;
+       }
+       iframe {
+       margin-right: 10px;
+       width: 440px;
+       height: 240px;
+       margin: 0 auto;
+       display: block;
+       border-style:none;
+       background:#777;
+       background-color: transparent;
+    }
+
+      .frame{
+      float:left;
+      margin:15px;
+      }
+#outer
+{
+    width:100%;
+    text-align: center;
+}
+.inner
+{
+    display: inline-block;
+}
+
+.setColor(e) {
+  var target = e.target;
+   target.style.backgroundColor : '#FFFFFF';
+
+}
+
+    </style>
+
+
+</head>
+
+
+<body>
+
+
+    <div class="bg">
+
+        <div id="navlist">
+        <a href="/">Home</a>
+        <a href="/visuals">Visualizations</a>
+        <a href="/about">About</a>
+        <a href="/team">The Team</a>
+        <img align="center" class="image" src="/static/logo_new.png" border="0" alt="Logo"></>
+    </div>
+        <br><br><br><br><br><br><br><br><br><br>
+
+<div id="outer">
+  <div class="inner"><button class="btn btn--radius btn--green" type="button" >All</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">PPSF & School Rating</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/views/Projectfinal2_16502274752200/TaxburdenDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">Tax Burden</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true')">Median Age</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('/static/recommend.html')">Recommended Counties</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('/static/cases.html')">Covid Cases</button></div>
+  <div class="inner"><button class="btn btn--radius btn--white" type="button" onclick="window.open('/static/vaccinated.html')">Percent Vaccinated</button></div>
+  <br><br>
+</div>
+         <div class="frame">
+        <iframe id="iframe" src="https://public.tableau.com/shared/5KQMWDFSF?:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+    </div>
+     <div class="frame">
+        <iframe src="https://public.tableau.com/views/Projectfinal2_16502274752200/TaxburdenDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+     </div>
+      <div class="frame">
+        <iframe src="https://public.tableau.com/views/Projectfinal3/MedianageDash?:language=en-US&publish=yes&:display_count=n&:origin=viz_share_link:embed=y&:showVizHome=no&:embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+          <div class="frame">
+        <iframe src="recommend.html":embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+          <div class="frame">
+        <iframe src="cases.html":embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+          <div class="frame">
+        <iframe src="vaccinated.html":embed=true" style="border: 1px solid black;"></iframe>
+      </div>
+</body>
+
