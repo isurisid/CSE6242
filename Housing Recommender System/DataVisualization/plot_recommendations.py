@@ -26,18 +26,11 @@ def generate_recommend_plot(df_recommend):
     fig = px.choropleth(df_fips_recommend,
             geojson=counties,
             locations='fips',
-            color=df_fips_recommend['Within Top 20 Recommendations'],
+            color=df_fips_recommend['Top 20'],
             color_discrete_map={'True':'red', 'False':'Yellow'},
             scope="usa",
             hover_data={'Info'}
            )
-
-    fig.add_scattergeo(
-        geojson=counties,
-        locations = df_fips_recommend['fips'][:20],
-        text = df_fips_recommend['county'][:20],
-        mode = 'text',
-        showlegend=False)
         
     fig.add_scattergeo(
         geojson=counties,
@@ -46,6 +39,6 @@ def generate_recommend_plot(df_recommend):
         hoverinfo = 'text',
         marker = dict(color = '#b2d2cf', size = 0.1),
         showlegend=False)
-    fig.update_layout(title_text = 'Recommended Counties <br> (hover over for details)')
+    fig.update_layout(title_text = 'Recommended Counties (hover over for details)' )
     plotly.offline.plot(fig,filename='./static/recommend.html',config={'displayModeBar': False}, auto_open=False)
     return fig

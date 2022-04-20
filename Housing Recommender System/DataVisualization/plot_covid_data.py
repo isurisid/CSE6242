@@ -46,7 +46,7 @@ def generate_covid_daily_cases_plot():
 
     fig.update_traces(text = "white")
     fig.update_layout(title_text = 'Average Daily COVID cases across US counties')
-    plotly.offline.plot(fig, filename='./static/cases.html', config={'displayModeBar': False},auto_open=False)
+    p=plotly.offline.plot(fig, filename='./static/cases.html', config={'displayModeBar': False},auto_open=False)
     return fig
 
 # plot percentage vaccinated
@@ -65,7 +65,7 @@ def generate_percent_vaccinated_plot():
         color_continuous_scale="RdYlGn",
         range_color=(0, 100),
         scope="usa",
-        labels={'percentage_fully_vaccinated':'Percentage - county vaccinated'},
+        labels={'percentage_fully_vaccinated':'% vaccinated'},
         hover_data=['county', 'state', 'daily_cases', 'percentage_fully_vaccinated']
     )
     fig.add_scattergeo(
