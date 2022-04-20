@@ -72,11 +72,8 @@ def runRecommendations():
         pivot_recommendations = runRewardandPunishmentModel(user_inputs)
         final_recommendations = generatePreferences(pivot_recommendations)
         graph_json_1,graph_json_2,graph_json_3= plot_recommendations(final_recommendations)
-        return render_template(
-            'plotly_graphs.html',
-            graphJSON1=graph_json_1,
-            graphJSON2=graph_json_2,
-            graphJSON3=graph_json_3)
+
+        return render_template('index.html')
 
         #return ""  # this is just to test R&P working with actual user data
         # return render_template("result.html", prediction=prediction)
