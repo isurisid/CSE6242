@@ -38,7 +38,7 @@ class CBRecommend():
         return self.df.nlargest(n_rec,"sim")
 
 def getDataset():
-    df=pd.read_csv("./ML/rp/data/rp-final-dataset.csv")
+    df=pd.read_csv("/home/housingrecommendations/CSE6242/Housing Recommender System/ML/rp/data/rp-final-dataset.csv")
     df=df[["period_end","county","state","state_code","median_ppsf","percentage_fully_vaccinated","tax_burden",'risk_index', 'risk',
         'cost_of_living_rank','medianage','elementary_school_rating','middle_school_rating','high_school_rating']]
     df['tax_burden'] = df['tax_burden'].astype(str).apply(lambda x: x.split("%")[0]).astype(float)

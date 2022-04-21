@@ -19,7 +19,7 @@ def connect_to_db():
 
 def add_df_to_db(conn):
     conn_string = db_info['db_url']
-    df = pd.read_csv("../ML/rp/data/v2-HousingRecommenderFinalDataset.csv")
+    df = pd.read_csv("/home/housingrecommendations/CSE6242/Housing Recommender System/ML/rp/data/v2-HousingRecommenderFinalDataset.csv")
     df.to_sql('public."CountyData"', con=conn, if_exists='replace',index=False)
     conn = psycopg2.connect(conn_string)
     conn.autocommit = True

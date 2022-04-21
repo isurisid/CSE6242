@@ -8,7 +8,7 @@ from . import utility as utility
 
 def get_covid_data():
     df_fips = utility.get_county_fips()
-    df_covid = pd.read_csv("./DataExtraction/final_data/HousingRecommenderCountyAggregateDataset.csv")
+    df_covid = pd.read_csv("/home/housingrecommendations/CSE6242/Housing Recommender System/DataExtraction/final_data/HousingRecommenderCountyAggregateDataset.csv")
     columns = ['county', 'state_code', 'daily_cases', 'percentage_fully_vaccinated']
     df_covid = pd.DataFrame(df_covid, columns=columns)
     df_covid = df_covid.rename(columns={"state_code": "state"})
@@ -46,7 +46,7 @@ def generate_covid_daily_cases_plot():
 
     fig.update_traces(text = "white")
     fig.update_layout(title_text = 'Average Daily COVID cases across US counties')
-    p=plotly.offline.plot(fig, filename='./static/cases.html', config={'displayModeBar': False},auto_open=False)
+    p=plotly.offline.plot(fig, filename='/home/housingrecommendations/CSE6242/Housing Recommender System/static/cases.html', config={'displayModeBar': False},auto_open=False)
     return fig
 
 # plot percentage vaccinated
@@ -78,5 +78,5 @@ def generate_percent_vaccinated_plot():
 
     fig.update_traces(text = "white")
     fig.update_layout(title_text = 'Percentage Vaccinated across US counties')
-    plotly.offline.plot(fig, filename='./static/vaccinated.html', config={'displayModeBar': False},auto_open=False)
+    plotly.offline.plot(fig, filename='/home/housingrecommendations/CSE6242/Housing Recommender System/static/vaccinated.html', config={'displayModeBar': False},auto_open=False)
     return fig

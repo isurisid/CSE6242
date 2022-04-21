@@ -19,7 +19,7 @@ app.config['JSON_SORT_KEYS'] = False
 def runRewardandPunishmentModel(user_inputs):
     logging.info("Running Reward and Punishment Model..")
     # Working directory is assumed as "Housing Recommender System/"
-    dataset = pd.read_csv("ML/rp/data/rp-final-dataset.csv")
+    dataset = pd.read_csv("/home/housingrecommendations/CSE6242/Housing Recommender System/ML/rp/data/rp-final-dataset.csv")
     pivot_recommendations = reward_punishment_orchestrator(dataset, user_inputs)
     logging.info(f"Pivot Recommendations {pivot_recommendations}")
     return pivot_recommendations

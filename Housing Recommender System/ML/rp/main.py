@@ -207,7 +207,7 @@ def reward_punishment_orchestrator(dataset, user_input):
 
 
 if __name__ == '__main__':
-    dataset = pd.read_csv("ML/rp/data/rp-final-dataset.csv")
+    dataset = pd.read_csv("/home/housingrecommendations/CSE6242/Housing Recommender System/ML/rp/data/rp-final-dataset.csv")
     sample_preferences = sanitize_input(raw_input=sample_input)
     final_df = main(original_df=dataset, preferences_data=sample_preferences)
     print(final_df.head(5))

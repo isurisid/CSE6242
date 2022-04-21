@@ -10,7 +10,7 @@ def get_county_geojson():
 
 def get_county_fips():
     # returns a dataframe with US counties and its fips
-    df_fips = pd.read_csv("./DataVisualization/data/state_and_county_fips_master.csv")
+    df_fips = pd.read_csv("/home/housingrecommendations/CSE6242/Housing Recommender System/DataVisualization/data/state_and_county_fips_master.csv")
     df_fips["fips"] = df_fips["fips"].astype("str")
     df_fips['fips'] = df_fips['fips'].apply(lambda x: x.zfill(5))
     df_fips = df_fips.dropna()
