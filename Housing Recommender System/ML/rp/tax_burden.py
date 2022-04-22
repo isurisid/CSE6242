@@ -3,16 +3,16 @@
 
 # Linear reward
 def reward(user_value: float, data_value: float) -> float:
-    diff = user_value - data_value
-    slope = 0.8
+    diff = abs(user_value - data_value)
+    slope = 1.5
     constant = 2
     return (slope * diff) + constant
 
 
 # Linear punish
 def punishment(user_value: float, data_value: float) -> float:
-    diff = user_value - data_value
-    slope = 1.2
+    diff = abs(user_value - data_value)
+    slope = 0.8
     constant = -1
     return (slope * diff) + constant
 
