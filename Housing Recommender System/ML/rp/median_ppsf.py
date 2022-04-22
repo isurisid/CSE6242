@@ -1,11 +1,11 @@
 def soft_punishment(user_value: float, data_value: float) -> float:
-    return user_value**(1.5) - data_value**(1.5)
+    # I want closer values to have more weight
+    return 1/abs(user_value - data_value)
 
 
 def hard_punishment(user_value: float, data_value: float) -> float:
-    # Formula is like this since  I want hard punishment to be negative
-    # most of the time. user_value < data_value
-    return user_value**2 - data_value**2
+    # I want closer values to have more weight
+    return 1/abs(user_value - data_value)
 
 
 def reward_and_punishment(user_value: float, data_value: float) -> float:
